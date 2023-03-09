@@ -1,20 +1,34 @@
-import React from "react";
-import { Button, Input } from "@material-tailwind/react";
+/** @format */
+
+import React, { useEffect, useState } from "react";
 import { GrNext, GrPrevious, GrFormNext, GrClose } from "react-icons/gr";
-import { IoMdArrowDropdown } from "react-icons/io";
-import { FcNext } from "react-icons/fc";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { MdNavigateNext } from "react-icons/md";
 import { FiSearch } from "react-icons/fi";
+import { FcPrevious } from "react-icons/fc";
+import supabase from "../configs/supabase";
+import { User } from "@supabase/supabase-js";
+import Button from "./Button";
+import { Link } from "react-router-dom";
+import { useUser } from "../contexts/AuthContext";
 
 const Navbar = () => {
+  const [toggle, setToggle] = useState(false);
+
+  const user = useUser()
+  
+  console.log(user?.user_metadata?.avatar_url);
+
+  console.log(toggle);
+
   return (
-    <div className="w-full h-16 bg-spotify-300 flex items-center px-8 justify-between">
+    <div className="w-full h-16 bg-spotify-300 flex items-center px-8 justify-between fixed z-20">
       <div className="flex gap-4">
         <button className="w-9 h-9 rounded-full bg-spotify-100 flex justify-center items-center">
-          <GrPrevious className="w-3 h-3 text-white" />
+          <MdNavigateNext className="w-9 h-9 rotate-180  text-white" />
         </button>
         <button className="w-9 h-9 rounded-full bg-spotify-100 flex justify-center items-center">
-          <MdNavigateNext className="w-9 h-9 text-3xl text-white" />
+          <MdNavigateNext className="w-9 h-9 text-white" />
         </button>
         <div className="w-[23rem] h-10 rounded-3xl bg-white flex items-center justify-between">
           <FiSearch className="w-6 h-6 ml-3" />
@@ -25,13 +39,47 @@ const Navbar = () => {
           <GrClose className="w-6 h-6 mr-3" />
         </div>
       </div>
-      <div>
-        <button className="w-28 h-9 rounded-full bg-spotify-200 flex justify-around items-center">
-          <button className="w-8 h-8 rounded-full bg-spotify-300 flex justify-center items-center"></button>
-          <span className="text-white text-sm font-bold">thu</span>
-          <IoMdArrowDropdown className="text-white text-[24px]"></IoMdArrowDropdown>
-        </button>
-      </div>
+
+      {!user ? (
+        <Link to = "/login" className="absolute left-[900px]">
+          <Button classNames="w-28 h-9 rounded-lg bg-white  font-bold text-center leading-9 cursor-pointer">
+            Login
+          </Button>
+        </Link>
+      ) : (
+        <div
+          className="absolute left-[900px] "
+          onClick={() => setToggle(!toggle)}
+        >
+          <button className="w-28 h-9 rounded-full bg-spotify-200 flex justify-around items-center">
+            <img
+              className="w-8 h-8 rounded-full bg-spotify-300 flex justify-center items-center"
+              src={""}
+            />
+            <span className="text-white text-sm font-bold">thu</span>
+            {toggle ? (
+              <IoMdArrowDropup className="text-white text-[24px]" />
+            ) : (
+              <IoMdArrowDropdown className="text-white text-[24px]" />
+            )}
+          </button>
+          {toggle && (
+            <div className="w-48 h-20 top-[50px] absolute right-0 bg-spotify-500 z-50 cursor-pointer">
+              <div className="p-1 flex flex-col">
+                <div
+                  className="h-10 pl-3 hover:bg-spotify-200 text-white leading-10"
+                  onClick={async () => {
+                    await supabase.auth.signOut();
+                    window.location.reload();
+                  }}
+                >
+                  Log out
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

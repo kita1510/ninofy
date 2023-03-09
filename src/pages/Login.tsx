@@ -14,16 +14,44 @@ const Login = () => {
     });
     navigate("/");
   };
+  const signInWithGoogle = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+    navigate("/");
+  };
+  const signInWithGitHub = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+    });
+    navigate("/");
+  };
 
   return (
-    <div className="flex w-full h-[560px] justify-center items-center">
+    <div className="flex flex-col w-full h-[560px] justify-center items-center gap-5">
       <Button
         className="w-60 flex gap-4 text-sm"
         color="green"
         onClick={signInWithSpotify}
       >
         <BsSpotify className="w-5 h-5" />
-        <span>Login with Spotify</span>{" "}
+        <span>Login with Spotify</span>
+      </Button>
+      <Button
+        className="w-60 flex gap-4 text-sm"
+        color="red"
+        onClick={signInWithGoogle}
+      >
+        <BsSpotify className="w-5 h-5" />
+        <span>Login with Google</span>
+      </Button>
+      <Button
+        className="w-60 flex gap-4 text-sm text-white"
+        color="purple"
+        onClick={signInWithGitHub}
+      >
+        <BsSpotify className="w-5 h-5" />
+        <span>Login with Github</span>
       </Button>
     </div>
   );
