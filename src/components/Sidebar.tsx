@@ -11,7 +11,7 @@ const Sidebar = () => {
     <div className="w-[360px] h-[680px] bg-spotify-100 px-6 py-6 flex flex-col gap-8">
       <div className="flex gap-1 items-center">
         <BsSpotify className="text-white w-10 h-10"></BsSpotify>
-        <span className="text-white text-[24px] font-bold">Spotify </span>
+        <span className="text-white text-[24px] font-bold">Ninofy </span>
       </div>
       <div className="text-white flex flex-col gap-3">
         <div className="flex items-center gap-4">
