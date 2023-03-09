@@ -3,7 +3,13 @@ import MusicCard from './MusicCard'
 
 const Container = () => {
   return (
-    <div><MusicCard></MusicCard></div>
+    <div className='flex gap-6 justify-center'>
+      <MusicCard/>
+      <MusicCard/>
+      <MusicCard/>
+      <MusicCard/>
+      <MusicCard/>
+      </div>
   )
 }
 

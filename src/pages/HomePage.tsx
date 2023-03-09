@@ -3,6 +3,7 @@ import { User } from "@supabase/supabase-js";
 import supabase from "../configs/supabase";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
+import Container from "../components/Container";
 
 const HomePage = () => {
   const [user, setUser] = useState<User | null>();
@@ -20,9 +21,10 @@ const HomePage = () => {
 
   return (
     <div className="flex">
-      <Sidebar></Sidebar>
+      <Sidebar />
       <div className="w-full">
-        <Navbar></Navbar>
+        <Navbar />
+        <Container />
       </div>
     </div>
   );
