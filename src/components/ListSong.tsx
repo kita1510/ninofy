@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import { Link } from "react-router-dom";
 import { songLists } from "../utils/dummyData";
 import MusicCard from "./MusicCard";
 
@@ -17,11 +18,14 @@ const ListSong = () => {
       </div>
       <div className="flex gap-6 ">
         {songLists.map((i) => (
+          <Link to={`/${i.id}`}>
           <MusicCard
+            id={i.id}
             imageSong={i.image}
             nameSong={i.nameSong}
             singer={i.singer}
-          />
+            />
+            </Link>
         ))}
       </div>
     </div>

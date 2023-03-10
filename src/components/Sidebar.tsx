@@ -8,13 +8,14 @@ import { GrDatabase, GrList } from "react-icons/gr";
 import { SiAddthis } from "react-icons/si";
 import { VscLibrary } from "react-icons/vsc";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="w-[360px] min-h-[680px] bg-spotify-100 px-6 py-6 flex flex-col gap-8 ">
-      <div className="flex gap-1 items-center">
+    <div className="w-[280px] min-h-[680px] bg-spotify-100 px-6 py-6 flex flex-col gap-8 ">
+      <div className="flex gap-1 items-center ">
         <BsSpotify className="text-white w-10 h-10" />
-        <span className="text-white text-[24px] font-bold">Ninofy </span>
+        <Link to = "/"><span className="text-white text-[24px] font-bold cursor-pointer">Ninofy </span></Link>
       </div>
       <div className="text-spotify-400 flex flex-col gap-3">
         <div className="flex items-center gap-4 cursor-pointer hover:text-white">

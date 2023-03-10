@@ -21,8 +21,10 @@ const HomePage = () => {
 
   return (
     <div className="flex">
-      <Sidebar />
-      <div className="w-full">
+      <div className="w-[30%] fixed">
+      <Sidebar/>
+      </div>
+      <div className="w-[80%] absolute right-0">
         <Navbar />
         <Container />
       </div>

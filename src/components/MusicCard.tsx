@@ -7,18 +7,21 @@ import { GiPauseButton } from "react-icons/gi";
 import { useState } from "react";
 
 interface SongProps {
+  id: number;
   imageSong: string;
   nameSong: string;
   singer: string;
 }
 
 function MusicCard({
+  id,
   imageSong,
   nameSong,
   singer,
   ...props
 }: Partial<SongProps>) {
   const [isActive, setIsActive] = useState(false);
+
 
   console.log(isActive);
   return (

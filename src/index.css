@@ -24,6 +24,10 @@
   transition: background-color 0.3s ease;
 }
 
+.transition-duration-400 {
+  transition: all 1s ease;
+}
+
 .card:hover .card-play{
   display: block;
 }
@@ -38,5 +42,5 @@
 }
 
 .transition-duration-200{
-  animation: rising 0.3s normal;
+  animation: rising 2s ;
 }
