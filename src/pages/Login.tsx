@@ -1,6 +1,6 @@
 import supabase from "../configs/supabase";
 import { FcGoogle } from "react-icons/fc";
-import { SiDiscord } from "react-icons/si";
+import { SiDiscord, SiSpotify } from "react-icons/si";
 import { BsGithub } from "react-icons/bs";
 import Button from "../components/Button";
 
@@ -20,6 +20,11 @@ const Login = () => {
       provider: "github",
     });
   }
+  async function signInWithSpotify() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "spotify",
+    });
+  }
   return (
     <div className="w-full h-[768px] font-semibold flex rounded-full relative">
       <div className="w-[40%]">
@@ -37,10 +42,10 @@ const Login = () => {
         </div>
         <Button
           classNames="bg-purple-600 w-[17rem] rounded-sm text-white flex justify-center items-center gap-4 hover:bg-purple-800"
-          onClick={signInWithDiscord}
+          onClick={signInWithSpotify}
         >
-          <SiDiscord className="text-2xl "></SiDiscord>
-          <span>Login with Discord</span>
+          <SiSpotify className="text-2xl "/>
+          <span>Login with Spotify</span>
         </Button>
         <Button
           classNames="bg-white w-[17rem] text-black rounded-sm flex justify-center items-center gap-4 hover:bg-slate-300"

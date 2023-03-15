@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import CardDetail from "./components/CardDetail";
 import Motion from "./components/Motion";
+import SongList from "./components/SongList";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/motion" element={<Motion/>}></Route>
         <Route path="/music/:id" element={<CardDetail/>}></Route>
+        <Route path="/songlist" element={<SongList/>}></Route>
       </Routes>
     </div>
   );
