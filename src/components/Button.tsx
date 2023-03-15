@@ -8,7 +8,7 @@ interface ButtonProps{
 
 const Button = ({children, classNames,onClick, ...props}: Partial<ButtonProps>) => {
   return (
-    <div className={`h-12 w-12 ${classNames}`} onClick = {onClick}>{children}</div>
+    <div className={`h-12 w-12 cursor-pointer ${classNames}`} onClick = {onClick}>{children}</div>
   )
 }
 

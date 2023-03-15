@@ -1,19 +1,15 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import { songLists } from '../utils/dummyData';
+import React from "react";
+import { useLocation } from "react-router-dom";
 
 const CardDetail = () => {
-    const paramsId = useParams();
-    const id = Number(paramsId.id) -1
-
-    console.log(id)
-    console.log(songLists[id])
+  const song = useLocation();
+  console.log(song);
   return (
-    <div className='bg-white'>
-        <div>{songLists[id].nameSong}</div> 
-        <img src={songLists[id].image} alt="" />
+    <div className="bg-white">
+      <div>{song.state.song.nameSong}</div>
+      <img src={song.state.song.image} alt="" />
     </div>
-  )
-}
+  );
+};
 
-export default CardDetail
+export default CardDetail;
