@@ -12,7 +12,7 @@ interface SongProps {
   imageSong: string;
   nameSong: string;
   singer: string;
-  onClick: () => void
+  onClick: () => void;
 }
 
 function MusicCard({
@@ -26,8 +26,8 @@ function MusicCard({
   const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate();
 
-  function viewDetailCard(){
-    navigate("/")
+  function viewDetailCard() {
+    navigate("/");
   }
 
   function handleClick() {

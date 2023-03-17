@@ -11,27 +11,31 @@ import { User } from "@supabase/supabase-js";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { useUser } from "../contexts/AuthContext";
-import {formatName} from "../utils/format"
+import { formatName } from "../utils/format";
 
-
-const Navbar = () => {
+const Navbar = ({ active }: { active: boolean }) => {
   const [toggle, setToggle] = useState(false);
   const [isScrool, setIsScrool] = useState(false);
 
-  const user = useUser()
+  const user = useUser();
 
-  console.log(formatName("luaannn"))
-  
+  console.log(formatName("luaannn"));
+
   console.log(user?.user_metadata?.avatar_url);
 
   console.log(window.scrollY);
 
-    window.onscroll = () =>{
-      setIsScrool(window.scrollY === 0 ? false : true)
-    }
+  window.onscroll = () => {
+    setIsScrool(window.scrollY === 0 ? false : true);
+  };
 
   return (
-    <div className={`w-full h-16 ${isScrool ? "bg-spotify-100" : "bg-transparent"} transition-duration-400 flex items-center px-8 justify-between fixed z-20`}>
+    <div
+      className={`w-full h-16 ${
+        active && isScrool ? "bg-spotify-100" : "bg-transparent"
+      } 
+       transition-duration-400 flex items-center px-8 justify-between fixed z-20`}
+    >
       <div className="flex gap-4">
         <button className="w-9 h-9 rounded-full bg-spotify-100 flex justify-center items-center">
           <MdNavigateNext className="w-9 h-9 rotate-180  text-white" />
@@ -50,7 +54,7 @@ const Navbar = () => {
       </div>
 
       {!user ? (
-        <Link to = "/login" className="absolute left-[900px]">
+        <Link to="/login" className="absolute left-[900px]">
           <Button classNames="w-28 h-9 rounded-lg bg-white  font-bold text-center leading-9 cursor-pointer">
             Login
           </Button>
@@ -65,7 +69,9 @@ const Navbar = () => {
               className="w-8 h-8 rounded-full bg-spotify-300 flex justify-center items-center"
               src={user?.user_metadata?.avatar_url}
             />
-            <span className="text-white text-sm font-bold">{formatName(user?.user_metadata?.name)}</span>
+            <span className="text-white text-sm font-bold">
+              {formatName(user?.user_metadata?.name)}
+            </span>
             {toggle ? (
               <IoMdArrowDropup className="text-white text-[24px]" />
             ) : (

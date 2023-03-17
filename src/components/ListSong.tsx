@@ -1,11 +1,39 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAccessToken } from "../contexts/SpotifyContext";
 import { songLists } from "../utils/dummyData";
 import MusicCard from "./MusicCard";
 
 const ListSong = () => {
+  const [artists, setArtists] = useState("");
+  const accessToken = useAccessToken();
+  var artistParameters = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + accessToken,
+    },
+  };
+
+  console.log(accessToken);
+
+  async function search() {
+    var artistID = await fetch(
+      "https://api.spotify.com/v1/search?q=" + "Taylor" + "&type=artist",
+      artistParameters
+    )
+      .then((res) => res.json())
+      .then((res) => setArtists(res));
+  }
+
+  useEffect(() => {
+    search();
+  }, []);
+
+  console.log(artists);
+
   return (
     <div className="flex gap-6 flex-col ">
       <div className="flex justify-between items-center">
@@ -18,7 +46,7 @@ const ListSong = () => {
       </div>
       <div className="flex gap-6 ">
         {songLists.map((i) => (
-          <Link to={{ pathname: `/music/${i.id}` }} state={{song: i}}>
+          <Link to={{ pathname: `/music/${i.id}` }} state={{ song: i }}>
             <MusicCard
               id={i.id}
               imageSong={i.image}

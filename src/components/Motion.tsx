@@ -2,16 +2,12 @@
 
 import { motion } from "framer-motion";
 import React from "react";
+import ReactAudioPlayer from "react-audio-player";
 import { Link } from "react-router-dom";
+import chimuonbenem from "../../public/chimuonbenem.mp3"
 
 const Motion = () => {
-  return (
-    <Link to="/">
-      <div className="w-30 h-30 p-6 top-80 absolute bg-white">
-        <div className="absolute z-20 ">aaaaa</div>
-      </div>
-    </Link>
-  );
+  return <ReactAudioPlayer src={chimuonbenem} autoPlay controls />;
 };
 
 export default Motion;
