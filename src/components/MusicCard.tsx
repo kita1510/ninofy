@@ -34,7 +34,7 @@ function MusicCard({
     setIsActive(!isActive);
   }
 
-  console.log(isActive);
+  // console.log(isActive);
   return (
     <Card
       className="h-64 w-44 relative bg-spotify-200 flex flex-col p-4 gap-1 cursor-pointer rounded-md transition-duration-300 hover:bg-spotify-500 card"

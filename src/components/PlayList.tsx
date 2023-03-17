@@ -1,31 +1,47 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import SpotifyWebApi from "react-spotify-web-playback";
 
 const PlayList = () => {
-  const accessToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjc5MDI0MzM0LCJzdWIiOiI1YzhhMzMyOS05ZDBlLTRjNDctOWEwYy0zOTBjNzZlNDdlMmYiLCJlbWFpbCI6ImRha25nb2trdEBnbWFpbC5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6InNwb3RpZnkiLCJwcm92aWRlcnMiOlsic3BvdGlmeSJdfSwidXNlcl9tZXRhZGF0YSI6eyJlbWFpbCI6ImRha25nb2trdEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZnVsbF9uYW1lIjoidGh1IiwiaXNzIjoiaHR0cHM6Ly9hcGkuc3BvdGlmeS5jb20vdjEiLCJuYW1lIjoidGh1IiwicHJvdmlkZXJfaWQiOiIzMTdsdWk1NDJmNTZkNzZwamRuN3Vxc2JnZWRxIiwic3ViIjoiMzE3bHVpNTQyZjU2ZDc2cGpkbjd1cXNiZ2VkcSJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6Im9hdXRoIiwidGltZXN0YW1wIjoxNjc5MDIwNzM0fV0sInNlc3Npb25faWQiOiJjYmI2NDFlZC1kN2NjLTRiYzUtYWVhYi1iMzlkN2ZhOTBjZTQifQ.LpipTROOfu7wNfSSkZl_mdJUjDPXeyYRCashN85s6_c";
-
+  const [accessToken, setAccessToken] = useState("")
+  const [playlists, setPlayLists] = useState();
+  console.log(accessToken)
   async function getPlayList() {
-    const data = await axios.get("", {
+    const data = await axios.get("https://api.spotify.com/v1/me/playlists", {
       headers: {
         Authorization: "Bearer" + accessToken,
         Accept: "application/json",
       },
     });
-    return data;
+    setPlayLists(data);
   }
 
-  const { data: playlist } = useQuery({
-    queryKey: ["playlist"],
-    queryFn: async () => {
-      await getPlayList;
-    },
-  });
+  useEffect(()=>{
+    const code = new URLSearchParams(window.location.search).get("code");
+    setAccessToken(code)
+  },[])
 
-  console.log(playlist);
+  console.log(accessToken)
 
-  return <div>PlayList</div>;
+  useEffect(() => {
+    getPlayList();
+
+    return () => {};
+  }, []);
+
+  console.log(playlists);
+
+  // const { data: playlist } = useQuery({
+  //   queryKey: ["playlist"],
+  //   queryFn: async () => {
+  //     await getPlayList;
+  //   },
+  // });
+
+  // console.log(playlist);
+
+  return <div>{/* <SpotifyWebApi token={accessToken}></SpotifyWebApi> */}</div>;
 };
 
 export default PlayList;

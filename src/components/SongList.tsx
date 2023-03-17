@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import spotifyAPI from "../services/spotify";
+// import spotifyAPI from "../services/spotify";
 import SpotifyPlayer from "react-spotify-web-playback";
 import axios from "axios";
 
 const SongList = () => {
   const clientId = "5bbfc9b0510d4a2dbc99c5d0e20d26ba";
-  const redirectUrl = "http://localhost:3000/";
+  const redirectUrl = "http://localhost:5173/";
     // "https://bdchptgaygdfvzcvzasr.supabase.co/auth/v1/callback";
   const scopes = [
     "user-read-currently-playing",
