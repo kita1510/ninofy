@@ -4,31 +4,24 @@ import SpotifyPlayer from "react-spotify-web-playback";
 import axios from "axios";
 
 const SongList = () => {
-  // const spotify = spotifyAPI.getAlbum("4aawyAB9vmqN3uQ7FjRGTy");
-  const accessToken =
-    "AQAkqzlULxetHA8axvPE85zK9My1njM0I41s5OwOnta7pBMLFeo8i1rDXfdBt6VUuhGZExTajWmATbh5wbdbvtAcjRMnTcwwYflW6cd2EWk8Sqi5pKLf8nKyjUKLbLWvDaU";
-  const [artists, setArtists] = useState("");
-
-  async function getArtists() {
-    const data = await axios.get("https://api.spotify.com/v1/me", {
-      headers: {
-        Authorization: "Bearer " + accessToken,
-        "Content-Type": "application/json",
-      },
-    });
-    setArtists(data);
-  }
-
-  useEffect(() => {
-    getArtists();
-  }, []);
-  console.log(artists);
-  console.log(spotifyAPI)
-  return (
-    <div>
-      <SpotifyPlayer token={accessToken} showSaveIcon />
-    </div>
-  );
+  const clientId = "5bbfc9b0510d4a2dbc99c5d0e20d26ba";
+  const redirectUrl = "http://localhost:3000/";
+    // "https://bdchptgaygdfvzcvzasr.supabase.co/auth/v1/callback";
+  const scopes = [
+    "user-read-currently-playing",
+    "user-read-recently-played",
+    "user-read-playback-state",
+    "user-top-read",
+    "user-modify-playback-state",
+  ];
+  const url = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=${scopes.join(
+    "%20"
+  )}&response_type=code&show_dialog=true`;
+  console.log(url);
+  // window.location.href = url;
+  return <div>
+    <a className="text-white" href={url}>Login </a>
+  </div>;
 };
 
 export default SongList;
