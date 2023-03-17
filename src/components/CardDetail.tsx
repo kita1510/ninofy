@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import { useLocation } from "react-router-dom";
 import { GrPlayFill } from "react-icons/gr";
@@ -6,15 +6,30 @@ import Button from "./Button";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import { AiOutlineEllipsis, AiOutlineHeart } from "react-icons/ai";
+import { BsFillPauseFill } from "react-icons/bs";
+import { useState } from "react";
 
 const CardDetail = () => {
   const song = useLocation();
-  console.log(song);
+  const [volume, setVolume] = useState(0.5);
+  const [playing, setPlaying] = useState(false);
+  console.log(volume);
 
-  const handlePlay = (e) =>{
-    
+  const volumeRef = useRef(0);
+  const audioRef = useRef();
+
+  function handlePlaying() {
+    audioRef.current?.play();
+    setPlaying(true);
   }
-  
+
+  function handleStopping() {
+    audioRef.current?.pause();
+    setPlaying(false);
+  }
+
+  console.log(volumeRef.current.valueOf());
+  console.log(audioRef.current?.play);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -25,7 +40,7 @@ const CardDetail = () => {
         <Sidebar />
       </div>
       <div className="w-[80%] absolute right-0">
-        <Navbar active={true}/>
+        <Navbar active={true} />
         <div className="w-full h-[400px] bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500">
           <div className="">
             <div className="w-[25%] h-full absolute top-0 left-0">
@@ -49,9 +64,21 @@ const CardDetail = () => {
           </div>
         </div>
         <div className="w-full absolute h-[200px] bg-gradient-to-b from-pink-600 via-pink-900 px-12 py-10">
-          <Button classNames="w-[56px] h-[56px] rounded-full bg-green-400 absolute flex justify-center items-center">
-            <GrPlayFill className={``} size={20} />
-          </Button>
+          {!playing ? (
+            <Button
+              classNames="w-[56px] h-[56px] rounded-full bg-green-400 absolute flex justify-center items-center"
+              onClick={handlePlaying}
+            >
+              <GrPlayFill className={``} size={20} />
+            </Button>
+          ) : (
+            <Button
+              classNames="w-[56px] h-[56px] rounded-full bg-green-400 absolute flex justify-center items-center"
+              onClick={handleStopping}
+            >
+              <BsFillPauseFill className={``} size={24} />
+            </Button>
+          )}
           <AiOutlineHeart
             className="absolute left-36 top-12"
             size={40}
@@ -62,7 +89,19 @@ const CardDetail = () => {
             size={40}
             color={"white"}
           />
-          <ReactAudioPlayer src={song.state.song.audio} autoPlay/>
+          <audio
+            className="absolute top-20"
+            ref={audioRef}
+            src={song.state.song.audio}
+          />
+
+          <input
+            className="top-40 absolute"
+            min="0"
+            max="1"
+            step="0.05"
+            type="range"
+          />
         </div>
       </div>
     </div>

@@ -19,11 +19,11 @@ const Navbar = ({ active }: { active: boolean }) => {
 
   const user = useUser();
 
-  console.log(formatName("luaannn"));
+  // console.log(formatName("luaannn"));
 
-  console.log(user?.user_metadata?.avatar_url);
+  // console.log(user?.user_metadata?.avatar_url);
 
-  console.log(window.scrollY);
+  // console.log(window.scrollY);
 
   window.onscroll = () => {
     setIsScrool(window.scrollY === 0 ? false : true);
