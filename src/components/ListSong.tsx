@@ -49,8 +49,8 @@ const ListSong = () => {
           <Link to={{ pathname: `/music/${i.id}` }} state={{ song: i }}>
             <MusicCard
               id={i.id}
-              imageSong={i.image}
-              nameSong={i.nameSong}
+              songImage={i.songImage}
+              songName={i.songName}
               singer={i.singer}
             />
           </Link>

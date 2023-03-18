@@ -8,15 +8,15 @@ import Sidebar from "./Sidebar";
 import { AiOutlineEllipsis, AiOutlineHeart } from "react-icons/ai";
 import { BsFillPauseFill } from "react-icons/bs";
 import { useState } from "react";
+import ControllerBar from "./ControllerBar";
 
 const CardDetail = () => {
   const song = useLocation();
-  const [volume, setVolume] = useState(0.5);
   const [playing, setPlaying] = useState(false);
-  console.log(volume);
 
-  const volumeRef = useRef(0);
-  const audioRef = useRef();
+  console.log(song.state);
+
+  const audioRef = useRef<HTMLAudioElement>(null!);
 
   function handlePlaying() {
     audioRef.current?.play();
@@ -27,9 +27,6 @@ const CardDetail = () => {
     audioRef.current?.pause();
     setPlaying(false);
   }
-
-  console.log(volumeRef.current.valueOf());
-  console.log(audioRef.current?.play);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -46,7 +43,7 @@ const CardDetail = () => {
             <div className="w-[25%] h-full absolute top-0 left-0">
               <img
                 className="w-52 h-52 rounded-full absolute bottom-14 left-14 object-cover object-center"
-                src={song.state.song.image}
+                src={song.state.song.songImage}
                 alt=""
               />
             </div>
@@ -55,7 +52,7 @@ const CardDetail = () => {
                 Song
               </div>
               <div className="absolute bottom-32 left-10 font-bold text-[50px] text-white ">
-                {song.state.song.nameSong}
+                {song.state.song.songName}
               </div>
               <div className="absolute bottom-10 left-5 font-semibold text-1xl text-white ">
                 {song.state.song.singer}
@@ -66,7 +63,7 @@ const CardDetail = () => {
         <div className="w-full absolute h-[200px] bg-gradient-to-b from-pink-600 via-pink-900 px-12 py-10">
           {!playing ? (
             <Button
-              classNames="w-[56px] h-[56px] rounded-full bg-green-400 absolute flex justify-center items-center"
+              classNames="w-[56px] h-[56px] rounded-full bg-green-400 absolute flex justify-center items-center hover:bg-green-300"
               onClick={handlePlaying}
             >
               <GrPlayFill className={``} size={20} />
@@ -103,6 +100,13 @@ const CardDetail = () => {
             type="range"
           />
         </div>
+      </div>
+      <div className="w-full h-[90px] fixed bottom-0 bg-spotify-200 border-t-[1px] border-slate-700 z-[099999]">
+        <ControllerBar
+          songName={song.state.song.songName}
+          songImage={song.state.song.songImage}
+          singer={song.state.song.singer}
+        ></ControllerBar>
       </div>
     </div>
   );

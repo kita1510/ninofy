@@ -29,7 +29,7 @@ const PlayList = () => {
 
   return (
     <div className="w-full h-[800px] bg-white flex gap-10">
-      {episodes?.map((e) => {
+      {episodes?.map((e:any) => {
         return (
           <div className="flex gap-10 flex-col">
             <img

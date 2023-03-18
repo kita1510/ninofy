@@ -7,18 +7,19 @@ import { GiPauseButton } from "react-icons/gi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface SongProps {
+export interface SongProps {
   id: number;
-  imageSong: string;
-  nameSong: string;
+  songImage: string;
+  songName: string;
   singer: string;
+  audio: string;
   onClick: () => void;
 }
 
 function MusicCard({
   id,
-  imageSong,
-  nameSong,
+  songImage,
+  songName,
   singer,
   onClick,
   ...props
@@ -42,7 +43,7 @@ function MusicCard({
         viewDetailCard;
       }}
     >
-      <Avatar className="w-36 h-36 " src={imageSong} />
+      <Avatar className="w-36 h-36 " src={songImage} />
       <Button
         onClick={() => handleClick()}
         classNames={`${
@@ -62,7 +63,7 @@ function MusicCard({
         )}
       </Button>
       <div className="text-white font-bold text-[1rem] mt-3 text-2xl">
-        {nameSong}
+        {songName}
       </div>
       <div className="text-spotify-400 text-[0.875rem] font-semibold">
         {singer}
