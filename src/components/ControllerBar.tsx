@@ -10,6 +10,7 @@ import { HiOutlineVolumeOff, HiOutlineVolumeUp } from "react-icons/hi";
 import { HiQueueList } from "react-icons/hi2";
 import { numberToMinute } from "../utils/numberToTime";
 import useSlider from "../hooks/useSlider";
+import { FiVolume1, FiVolume2, FiVolumeX } from "react-icons/fi";
 
 const ControllerBar = ({
   songImage,
@@ -26,6 +27,7 @@ const ControllerBar = ({
   progress,
   volume,
   handleSeekTime,
+  handleSeekVolume,
   unMutedVolume,
   step,
   ...props
@@ -33,6 +35,8 @@ const ControllerBar = ({
   let i: number = 0;
   const arr = [3, 4, 5, 6];
   const { nextSong, previousSong } = useSlider(i, arr);
+
+  const [volumeLevel, setVolumLevel] = useState(0);
 
   console.log(arr[i]);
   // console.log(currentTime);
@@ -117,21 +121,31 @@ const ControllerBar = ({
           </div>
         </div>
       </div>
+      
 
       <div className="flex justify-around items-center w-[30%]">
         <div className="flex items-center gap-4">
           <TbMicrophone2 color="white" size={20} cursor={"pointer"} />
           <HiQueueList color="white" size={20} cursor={"pointer"} />
 
-          {!isMuted ? (
-            <HiOutlineVolumeUp
+          {volume > 0 && volume < 0.25 && (
+            <FiVolume1
               color="white"
               size={20}
               cursor={"pointer"}
               onClick={mutedVolume}
             />
-          ) : (
-            <HiOutlineVolumeOff
+          )}
+          {volume >= 0.25 && (
+            <FiVolume2
+              color="white"
+              size={20}
+              cursor={"pointer"}
+              onClick={mutedVolume}
+            />
+          )}
+          {volume == 0 && (
+            <FiVolumeX
               color="white"
               size={20}
               cursor={"pointer"}
@@ -144,8 +158,8 @@ const ControllerBar = ({
             min={"0"}
             step={"0.05"}
             max={"1"}
-            value = {volume}
-            onChange={(e) => console.log(e.target.value)}
+            value={volume}
+            onChange={(e) => handleSeekVolume(e)}
           />
         </div>
       </div>

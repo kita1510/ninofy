@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useMemo, useRef } from "react";
+import React, { ChangeEvent, EventHandler, memo, useCallback, useEffect, useMemo, useRef } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import { useLocation } from "react-router-dom";
 import { GrPlayFill } from "react-icons/gr";
@@ -19,15 +19,15 @@ const CardDetail = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [volume, setVolume] = useState(0.5);
+  const audioRef = useRef<HTMLAudioElement>(null!);
+  const [volume, setVolume] = useState(0.6);
 
   // console.log(isMuted);
   // console.log(song.state);
 
-  const audioRef = useRef<HTMLAudioElement>(null!);
 
   songDuration = audioRef.current?.duration;
-  // console.log(audioRef);
+  console.log(audioRef);
   // console.log(audioRef.current?.currentTime);
 
   function handlePlaying() {
@@ -52,7 +52,7 @@ const CardDetail = () => {
     };
   }
 
-  function handleSeekTime(e) {
+  function handleSeekTime(e: any) {
     audioRef.current.currentTime = songDuration /100 * e.target?.value;
   }
 
@@ -64,6 +64,13 @@ const CardDetail = () => {
   function unMutedVolume() {
     setIsMuted(false);
     setVolume(0.5);
+  }
+
+  function handleSeekVolume (e) {
+    audioRef.current.volume = e.target.value
+    setVolume(e.target.value)
+    audioRef.current.onvolumechange = () =>{
+    }
   }
 
   useEffect(() => {
@@ -150,6 +157,7 @@ const CardDetail = () => {
           progress={progress}
           volume = {volume}
           handleSeekTime={handleSeekTime}
+          handleSeekVolume={handleSeekVolume}
           step={step}
         ></ControllerBar>
       </div>
