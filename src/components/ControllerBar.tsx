@@ -6,15 +6,17 @@ import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsPlayCircleFill, BsPauseCircleFill } from "react-icons/bs";
 import { ImLoop2 } from "react-icons/im";
-import { HiOutlineVolumeUp } from "react-icons/hi";
+import { HiOutlineVolumeOff, HiOutlineVolumeUp } from "react-icons/hi";
 import { HiQueueList } from "react-icons/hi2";
 import { numberToMinute } from "../utils/numberToTime";
+import useSlider from "../hooks/useSlider";
 
 const ControllerBar = ({
   songImage,
   songName,
   singer,
   isPlaying,
+  isMuted,
   handlePlaying,
   handlePausing,
   songDuration,
@@ -22,10 +24,17 @@ const ControllerBar = ({
   mutedVolume,
   audioRef,
   progress,
+  volume,
   handleSeekTime,
+  unMutedVolume,
   step,
   ...props
 }: Partial<SongProps>) => {
+  let i: number = 0;
+  const arr = [3, 4, 5, 6];
+  const { nextSong, previousSong } = useSlider(i, arr);
+
+  console.log(arr[i]);
   // console.log(currentTime);
   return (
     <div className="w-full h-full flex items-center mx-4 justify-between">
@@ -56,6 +65,7 @@ const ControllerBar = ({
             className="opacity-80 hover:opacity-100"
             color="white"
             size={40}
+            onClick={previousSong}
           />
           {!isPlaying ? (
             <BsPlayCircleFill
@@ -76,6 +86,12 @@ const ControllerBar = ({
             className="opacity-80 hover:opacity-100"
             color="white"
             size={40}
+            onClick={() => {
+              nextSong();
+              console.log("aaa");
+              console.log(arr[i]);
+              // i++;
+            }}
           />
           <ImLoop2
             className="opacity-80 hover:opacity-100"
@@ -91,9 +107,9 @@ const ControllerBar = ({
             className="h-1 w-96 cursor-pointer"
             type="range"
             min={"0"}
-            step={`${0.01}`}
-            max={"1"}
-            value={currentTime / songDuration}
+            step={`1`}
+            max={"100"}
+            value={(currentTime / songDuration) * 100}
             onChange={(e) => handleSeekTime(e)}
           />
           <div className="text-white text-sm">
@@ -104,20 +120,31 @@ const ControllerBar = ({
 
       <div className="flex justify-around items-center w-[30%]">
         <div className="flex items-center gap-4">
-          <TbMicrophone2
-            color="white"
-            size={20}
-            cursor={"pointer"}
-            onClick={mutedVolume}
-          />
+          <TbMicrophone2 color="white" size={20} cursor={"pointer"} />
           <HiQueueList color="white" size={20} cursor={"pointer"} />
-          <HiOutlineVolumeUp color="white" size={20} cursor={"pointer"} />
+
+          {!isMuted ? (
+            <HiOutlineVolumeUp
+              color="white"
+              size={20}
+              cursor={"pointer"}
+              onClick={mutedVolume}
+            />
+          ) : (
+            <HiOutlineVolumeOff
+              color="white"
+              size={20}
+              cursor={"pointer"}
+              onClick={unMutedVolume}
+            />
+          )}
           <input
             className="h-1 w-28 cursor-pointer"
             type="range"
             min={"0"}
             step={"0.05"}
             max={"1"}
+            value = {volume}
             onChange={(e) => console.log(e.target.value)}
           />
         </div>

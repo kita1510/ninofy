@@ -19,6 +19,7 @@ const CardDetail = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [volume, setVolume] = useState(0.5);
 
   // console.log(isMuted);
   // console.log(song.state);
@@ -52,11 +53,17 @@ const CardDetail = () => {
   }
 
   function handleSeekTime(e) {
-    setCurrentTime((currentTime / songDuration) *100 * e.target?.value);
+    audioRef.current.currentTime = songDuration /100 * e.target?.value;
   }
 
   function mutedVolume() {
     setIsMuted(true);
+    setVolume(0)
+  }
+
+  function unMutedVolume() {
+    setIsMuted(false);
+    setVolume(0.5);
   }
 
   useEffect(() => {
@@ -122,6 +129,7 @@ const CardDetail = () => {
             ref={audioRef}
             src={song.state.song.audio}
             muted={isMuted}
+            
           />
         </div>
       </div>
@@ -137,8 +145,10 @@ const CardDetail = () => {
           currentTime={currentTime}
           isMuted={isMuted}
           mutedVolume={mutedVolume}
+          unMutedVolume = {unMutedVolume}
           audioRef={audioRef}
           progress={progress}
+          volume = {volume}
           handleSeekTime={handleSeekTime}
           step={step}
         ></ControllerBar>
