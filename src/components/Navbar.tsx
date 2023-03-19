@@ -13,7 +13,13 @@ import { Link } from "react-router-dom";
 import { useUser } from "../contexts/AuthContext";
 import { formatName } from "../utils/format";
 
-const Navbar = ({ active }: { active: boolean }) => {
+const Navbar = ({
+  active,
+  isSearch,
+}: {
+  active: boolean;
+  isSearch: boolean;
+}) => {
   const [toggle, setToggle] = useState(false);
   const [isScrool, setIsScrool] = useState(false);
 
@@ -43,14 +49,16 @@ const Navbar = ({ active }: { active: boolean }) => {
         <button className="w-9 h-9 rounded-full bg-spotify-100 flex justify-center items-center">
           <MdNavigateNext className="w-9 h-9 text-white" />
         </button>
-        <div className="w-[23rem] h-10 rounded-3xl bg-white flex items-center justify-between">
-          <FiSearch className="w-6 h-6 ml-3" />
-          <input
-            className="w-64 h-full focus:outline-none text-sm"
-            placeholder="What do you want to listen to?"
-          />
-          <GrClose className="w-6 h-6 mr-3" />
-        </div>
+        {isSearch && (
+          <div className="w-[23rem] h-10 rounded-3xl bg-white flex items-center justify-between">
+            <FiSearch className="w-6 h-6 ml-3" />
+            <input
+              className="w-64 h-full focus:outline-none text-sm"
+              placeholder="What do you want to listen to?"
+            />
+            <GrClose className="w-6 h-6 mr-3" />
+          </div>
+        )}
       </div>
 
       {!user ? (

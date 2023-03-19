@@ -26,7 +26,7 @@ const HomePage = () => {
         <Sidebar />
       </div>
       <div className="w-[80%] absolute right-0">
-        <Navbar active={true}/>
+        <Navbar active={true} isSearch = {false}/>
         <Container />
       </div>
     </div>

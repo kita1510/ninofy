@@ -46,7 +46,10 @@ const ListSong = () => {
       </div>
       <div className="flex gap-6 ">
         {songLists.map((i) => (
-          <Link to={{ pathname: `/music/${i.id}` }} state={{ song: i }}>
+          <Link
+            to={{ pathname: `/music/${i.id}` }}
+            state={{ song: i, listSong: songLists }}
+          >
             <MusicCard
               id={i.id}
               songImage={i.songImage}

@@ -13,7 +13,7 @@ export const songLists = [
       "https://i.pinimg.com/564x/b5/25/ca/b525cafaa10f9dfbfcbd19c2718a3464.jpg",
     songName: "アイン",
     singer: "Nino",
-    audio: "../../public/chimuonbenem.mp3",
+    audio: "../../public/saynang.mp3",
   },
   {
     id: 3,

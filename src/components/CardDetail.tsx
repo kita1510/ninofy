@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { memo, useCallback, useEffect, useMemo, useRef } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import { useLocation } from "react-router-dom";
 import { GrPlayFill } from "react-icons/gr";
@@ -9,23 +9,54 @@ import { AiOutlineEllipsis, AiOutlineHeart } from "react-icons/ai";
 import { BsFillPauseFill } from "react-icons/bs";
 import { useState } from "react";
 import ControllerBar from "./ControllerBar";
+import { numberToMinute } from "../utils/numberToTime";
+import { progress } from "framer-motion";
+let songDuration = 0;
 
 const CardDetail = () => {
+  const [currentTime, setCurrentTime] = useState(0);
   const song = useLocation();
-  const [playing, setPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  console.log(song.state);
+  // console.log(isMuted);
+  // console.log(song.state);
 
   const audioRef = useRef<HTMLAudioElement>(null!);
 
+  songDuration = audioRef.current?.duration;
+  // console.log(audioRef);
+  // console.log(audioRef.current?.currentTime);
+
   function handlePlaying() {
     audioRef.current?.play();
-    setPlaying(true);
+    audioRef.current.onplay = () => {
+      setIsPlaying(true);
+    };
+    audioRef.current.ontimeupdate = () => {
+      setCurrentTime((prev) => (prev = audioRef.current?.currentTime));
+      // console.log(currentTime);
+    };
   }
 
-  function handleStopping() {
+  const step = audioRef.current?.duration / 60 / 100;
+  // console.log(1 / step);
+  console.log(currentTime );
+
+  function handlePausing() {
     audioRef.current?.pause();
-    setPlaying(false);
+    audioRef.current.onpause = () => {
+      setIsPlaying(false);
+    };
+  }
+
+  function handleSeekTime(e) {
+    setCurrentTime((currentTime / songDuration) *100 * e.target?.value);
+  }
+
+  function mutedVolume() {
+    setIsMuted(true);
   }
 
   useEffect(() => {
@@ -37,7 +68,7 @@ const CardDetail = () => {
         <Sidebar />
       </div>
       <div className="w-[80%] absolute right-0">
-        <Navbar active={true} />
+        <Navbar active={true} isSearch={false} />
         <div className="w-full h-[400px] bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500">
           <div className="">
             <div className="w-[25%] h-full absolute top-0 left-0">
@@ -61,7 +92,7 @@ const CardDetail = () => {
           </div>
         </div>
         <div className="w-full absolute h-[200px] bg-gradient-to-b from-pink-600 via-pink-900 px-12 py-10">
-          {!playing ? (
+          {!isPlaying ? (
             <Button
               classNames="w-[56px] h-[56px] rounded-full bg-green-400 absolute flex justify-center items-center hover:bg-green-300"
               onClick={handlePlaying}
@@ -71,7 +102,7 @@ const CardDetail = () => {
           ) : (
             <Button
               classNames="w-[56px] h-[56px] rounded-full bg-green-400 absolute flex justify-center items-center"
-              onClick={handleStopping}
+              onClick={handlePausing}
             >
               <BsFillPauseFill className={``} size={24} />
             </Button>
@@ -90,14 +121,7 @@ const CardDetail = () => {
             className="absolute top-20"
             ref={audioRef}
             src={song.state.song.audio}
-          />
-
-          <input
-            className="top-40 absolute"
-            min="0"
-            max="1"
-            step="0.05"
-            type="range"
+            muted={isMuted}
           />
         </div>
       </div>
@@ -106,6 +130,17 @@ const CardDetail = () => {
           songName={song.state.song.songName}
           songImage={song.state.song.songImage}
           singer={song.state.song.singer}
+          isPlaying={isPlaying}
+          handlePlaying={handlePlaying}
+          handlePausing={handlePausing}
+          songDuration={songDuration}
+          currentTime={currentTime}
+          isMuted={isMuted}
+          mutedVolume={mutedVolume}
+          audioRef={audioRef}
+          progress={progress}
+          handleSeekTime={handleSeekTime}
+          step={step}
         ></ControllerBar>
       </div>
     </div>

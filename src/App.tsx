@@ -6,12 +6,14 @@ import PlayList from "./components/PlayList";
 import SongList from "./components/SongList";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
-    <div className="w-full h-[800px] bg-spotify-300">
+    <div className="w-full h-[768px] bg-spotify-300">
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<SearchPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/motion" element={<Motion/>}></Route>
         <Route path="/music/:id" element={<CardDetail/>}></Route>

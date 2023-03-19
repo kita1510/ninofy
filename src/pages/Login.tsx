@@ -27,12 +27,10 @@ const Login = () => {
   }
   return (
     <div className="w-full h-[768px] font-semibold flex rounded-full relative">
-      <div className="w-[40%]">
+      <div className="w-[40%] h-full">
         <img
           className="w-full h-full object-cover"
-          src={
-            "https://i.pinimg.com/564x/13/24/9c/13249cc9077400c9fb41e9d21fa772f8.jpg"
-          }
+          src={"https://rare-gallery.com/uploads/posts/501656-original-4k.jpg"}
           alt=""
         />
       </div>
@@ -41,10 +39,10 @@ const Login = () => {
           <div className="text-[40px] font-bold text-white">ĐĂNG NHẬP</div>
         </div>
         <Button
-          classNames="bg-purple-600 w-[17rem] rounded-sm text-white flex justify-center items-center gap-4 hover:bg-purple-800"
+          classNames="bg-green-600 w-[17rem] rounded-sm text-white flex justify-center items-center gap-4 hover:bg-green-800"
           onClick={signInWithSpotify}
         >
-          <SiSpotify className="text-2xl "/>
+          <SiSpotify className="text-2xl " />
           <span>Login with Spotify</span>
         </Button>
         <Button
