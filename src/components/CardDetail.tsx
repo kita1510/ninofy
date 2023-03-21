@@ -76,6 +76,7 @@ const CardDetail = () => {
     audioRef.current.loop = true
   }
 
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);

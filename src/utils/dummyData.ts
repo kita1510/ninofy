@@ -5,7 +5,7 @@ export const songLists = [
       "https://i.pinimg.com/564x/7f/42/08/7f4208fed16f7c97306dbb0ff992d3d1.jpg",
     songName: "Candy Pop",
     singer: "Yui Yuigahama",
-    audio: "../../public/chimuonbenem.mp3",
+    audio: "../assets/chimuonbenem.mp3",
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ export const songLists = [
       "https://i.pinimg.com/564x/b5/25/ca/b525cafaa10f9dfbfcbd19c2718a3464.jpg",
     songName: "アイン",
     singer: "Nino",
-    audio: "../../public/saynang.mp3",
+    audio: "../assets/saynang.mp3",
   },
   {
     id: 3,

@@ -11,6 +11,7 @@ import { HiQueueList } from "react-icons/hi2";
 import { numberToMinute } from "../utils/numberToTime";
 import useSlider from "../hooks/useSlider";
 import { FiVolume1, FiVolume2, FiVolumeX } from "react-icons/fi";
+import ""
 
 const ControllerBar = ({
   songImage,
@@ -42,7 +43,7 @@ const ControllerBar = ({
   return (
     <div className="w-full h-full flex items-center mx-4 justify-between">
       <div className="flex items-center gap-4 w-[30%]">
-        <img className="w-14 h-14 cursor-pointer" src={songImage} alt="" />
+        <img className="w-14 h-14 cursor-pointer object-cover object-center" src={songImage} alt="" />
         <div>
           <div className="font-bold text-white cursor-pointer hover:underline">
             {songName}
