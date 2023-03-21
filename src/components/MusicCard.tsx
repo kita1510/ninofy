@@ -4,7 +4,7 @@ import { Card, Avatar, Typography } from "@material-tailwind/react";
 import Button from "./Button";
 import { ImPlay3 } from "react-icons/im";
 import { GiPauseButton } from "react-icons/gi";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export interface SongProps {
@@ -13,7 +13,22 @@ export interface SongProps {
   songName: string;
   singer: string;
   audio: string;
-  onClick: () => void;
+  isPlaying: boolean;
+  isMuted: boolean;
+  handlePlaying: () => void;
+  handlePausing: () => void
+  songDuration: number;
+  currentTime: number;
+  mutedVolume: () => void;
+  unMutedVolume: ()=> void;
+  audioRef : any;
+  progress: number;
+  volume: number;
+  handleSeekTime: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSeekVolume: (e:any) => void;
+  handleLoop: ()=>void;
+  isLoop: boolean;
+  step: number;
 }
 
 function MusicCard({
@@ -21,7 +36,6 @@ function MusicCard({
   songImage,
   songName,
   singer,
-  onClick,
   ...props
 }: Partial<SongProps>) {
   const [isActive, setIsActive] = useState(false);
@@ -40,7 +54,7 @@ function MusicCard({
     <Card
       className="h-64 w-44 relative bg-spotify-200 flex flex-col p-4 gap-1 cursor-pointer rounded-md transition-duration-300 hover:bg-spotify-500 card"
       onClick={() => {
-        viewDetailCard;
+        viewDetailCard();
       }}
     >
       <Avatar className="w-36 h-36 " src={songImage} />

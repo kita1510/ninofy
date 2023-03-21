@@ -29,16 +29,15 @@ const ControllerBar = ({
   handleSeekTime,
   handleSeekVolume,
   unMutedVolume,
+  handleLoop,
+  isLoop,
   step,
   ...props
-}: Partial<SongProps>) => {
+}: SongProps) => {
   let i: number = 0;
   const arr = [3, 4, 5, 6];
   const { nextSong, previousSong } = useSlider(i, arr);
-
-  const [volumeLevel, setVolumLevel] = useState(0);
-
-  console.log(arr[i]);
+  // console.log(arr[i]);
   // console.log(currentTime);
   return (
     <div className="w-full h-full flex items-center mx-4 justify-between">
@@ -99,8 +98,10 @@ const ControllerBar = ({
           />
           <ImLoop2
             className="opacity-80 hover:opacity-100"
-            color="white"
+            color={`${isLoop ? "green" : "white"} `}
             size={20}
+            onClick={handleLoop}
+
           />
         </div>
         <div className="flex gap-3 justify-center items-center">
@@ -121,12 +122,15 @@ const ControllerBar = ({
           </div>
         </div>
       </div>
-      
 
       <div className="flex justify-around items-center w-[30%]">
         <div className="flex items-center gap-4">
           <TbMicrophone2 color="white" size={20} cursor={"pointer"} />
-          <HiQueueList color="white" size={20} cursor={"pointer"} />
+          <HiQueueList
+            color="white"
+            size={20}
+            cursor={"pointer"}
+          />
 
           {volume > 0 && volume < 0.25 && (
             <FiVolume1

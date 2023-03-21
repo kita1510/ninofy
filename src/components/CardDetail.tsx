@@ -1,4 +1,4 @@
-import React, { ChangeEvent, EventHandler, memo, useCallback, useEffect, useMemo, useRef } from "react";
+import React, { ChangeEvent, EventHandler, HTMLInputTypeAttribute, memo, MutableRefObject, useCallback, useEffect, useMemo, useRef } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import { useLocation } from "react-router-dom";
 import { GrPlayFill } from "react-icons/gr";
@@ -11,6 +11,7 @@ import { useState } from "react";
 import ControllerBar from "./ControllerBar";
 import { numberToMinute } from "../utils/numberToTime";
 import { progress } from "framer-motion";
+
 let songDuration = 0;
 
 const CardDetail = () => {
@@ -18,17 +19,14 @@ const CardDetail = () => {
   const song = useLocation();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [isLoop, setIsLoop] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null!);
   const [volume, setVolume] = useState(0.6);
 
-  // console.log(isMuted);
-  // console.log(song.state);
-
-
   songDuration = audioRef.current?.duration;
+
   console.log(audioRef);
-  // console.log(audioRef.current?.currentTime);
 
   function handlePlaying() {
     audioRef.current?.play();
@@ -43,7 +41,7 @@ const CardDetail = () => {
 
   const step = audioRef.current?.duration / 60 / 100;
   // console.log(1 / step);
-  console.log(currentTime );
+  // console.log(currentTime );
 
   function handlePausing() {
     audioRef.current?.pause();
@@ -66,11 +64,16 @@ const CardDetail = () => {
     setVolume(0.5);
   }
 
-  function handleSeekVolume (e) {
+  function handleSeekVolume (e:any) {
     audioRef.current.volume = e.target.value
     setVolume(e.target.value)
     audioRef.current.onvolumechange = () =>{
     }
+  }
+
+  function handleLoop (){
+    setIsLoop(!isLoop)
+    audioRef.current.loop = true
   }
 
   useEffect(() => {
@@ -136,21 +139,24 @@ const CardDetail = () => {
             ref={audioRef}
             src={song.state.song.audio}
             muted={isMuted}
+            loop = {isLoop}
             
           />
         </div>
       </div>
       <div className="w-full h-[90px] fixed bottom-0 bg-spotify-200 border-t-[1px] border-slate-700 z-[099999]">
         <ControllerBar
+          id={song.state.song.id}
           songName={song.state.song.songName}
           songImage={song.state.song.songImage}
           singer={song.state.song.singer}
+          audio= {song.state.song.audio}
           isPlaying={isPlaying}
+          isMuted={isMuted}
           handlePlaying={handlePlaying}
           handlePausing={handlePausing}
           songDuration={songDuration}
           currentTime={currentTime}
-          isMuted={isMuted}
           mutedVolume={mutedVolume}
           unMutedVolume = {unMutedVolume}
           audioRef={audioRef}
@@ -158,6 +164,8 @@ const CardDetail = () => {
           volume = {volume}
           handleSeekTime={handleSeekTime}
           handleSeekVolume={handleSeekVolume}
+          handleLoop= {handleLoop}
+          isLoop = {isLoop}
           step={step}
         ></ControllerBar>
       </div>
