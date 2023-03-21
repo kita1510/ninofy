@@ -10,7 +10,7 @@ import { BsFillPauseFill } from "react-icons/bs";
 import { useState } from "react";
 import ControllerBar from "./ControllerBar";
 import { numberToMinute } from "../utils/numberToTime";
-import { progress } from "framer-motion";
+import chimuonbenem from "../assets/chimuonbenem.mp3";
 
 let songDuration = 0;
 
@@ -21,7 +21,7 @@ const CardDetail = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [isLoop, setIsLoop] = useState(false);
   const [progress, setProgress] = useState(0);
-  const audioRef = useRef<HTMLAudioElement>(null!);
+  const audioRef = useRef<HTMLMediaElement>(null!);
   const [volume, setVolume] = useState(0.6);
 
   songDuration = audioRef.current?.duration;
@@ -75,6 +75,8 @@ const CardDetail = () => {
     setIsLoop(!isLoop)
     audioRef.current.loop = true
   }
+
+  console.log(song.state.song.audio)
 
 
   useEffect(() => {

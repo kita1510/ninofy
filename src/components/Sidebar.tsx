@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="w-[290px] min-h-[680px] bg-spotify-100 px-6 py-6 flex flex-col gap-8 ">
+    <div className="w-[290px] min-h-[800px] bg-spotify-100 px-6 py-6 flex flex-col gap-8 ">
       <div className="flex gap-1 items-center ">
         <BsSpotify className="text-white w-10 h-10" />
         <Link to="/">

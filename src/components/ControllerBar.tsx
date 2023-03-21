@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SongProps } from "./MusicCard";
+import { SongProps } from "../types/index";
 import { MdPictureInPictureAlt } from "react-icons/md";
 import { TbArrowsShuffle, TbMicrophone2 } from "react-icons/tb";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
@@ -11,7 +11,6 @@ import { HiQueueList } from "react-icons/hi2";
 import { numberToMinute } from "../utils/numberToTime";
 import useSlider from "../hooks/useSlider";
 import { FiVolume1, FiVolume2, FiVolumeX } from "react-icons/fi";
-import ""
 
 const ControllerBar = ({
   songImage,
@@ -94,7 +93,6 @@ const ControllerBar = ({
               nextSong();
               console.log("aaa");
               console.log(arr[i]);
-              // i++;
             }}
           />
           <ImLoop2
