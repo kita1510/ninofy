@@ -9,8 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "./contexts/AuthContext";
 import SpotifyProvider from "./contexts/SpotifyContext";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools/build/lib/devtools";
-import SongProvider from "./contexts/SongContext";
+import PlayerProvider from "./contexts/PlayerContext";
 
 const client = new QueryClient();
 
@@ -19,13 +18,13 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <ThemeProvider>
       <QueryClientProvider client={client}>
         <SpotifyProvider>
-          <SongProvider>
+          <PlayerProvider>
             <AuthProvider>
               <BrowserRouter>
                 <App />
               </BrowserRouter>
             </AuthProvider>
-          </SongProvider>
+          </PlayerProvider>
         </SpotifyProvider>
       </QueryClientProvider>
     </ThemeProvider>

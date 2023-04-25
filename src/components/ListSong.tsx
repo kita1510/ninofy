@@ -1,13 +1,20 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
+import { GiPauseButton } from "react-icons/gi";
+import { ImPlay3 } from "react-icons/im";
 import { Link } from "react-router-dom";
+import { usePlayer } from "../contexts/PlayerContext";
 import { useAccessToken } from "../contexts/SpotifyContext";
 import { songLists } from "../utils/dummyData";
-import MusicCard from "./MusicCard";
+import Button from "./shared/Button";
+import CircleButton from "./shared/CircleButton";
+import MusicCard from "./shared/MusicCard";
 
 const ListSong = () => {
   const [artists, setArtists] = useState("");
+  const { isPlaying, setSong, currentSong, handlePlaying, handlePausing } =
+    usePlayer();
   const accessToken = useAccessToken();
   var artistParameters = {
     method: "GET",
@@ -17,7 +24,7 @@ const ListSong = () => {
     },
   };
 
-  console.log(accessToken);
+  // console.log(accessToken);
 
   async function search() {
     var artistID = await fetch(
@@ -32,7 +39,7 @@ const ListSong = () => {
     search();
   }, []);
 
-  console.log(artists);
+  // console.log(artists);
 
   return (
     <div className="flex gap-6 flex-col ">
@@ -44,19 +51,50 @@ const ListSong = () => {
           Show all
         </div>
       </div>
+      <div></div>
       <div className="flex gap-6 ">
         {songLists.map((i) => (
-          <Link
-            to={{ pathname: `/music/${i.id}` }}
-            state={{ song: i, listSong: songLists }}
-          >
-            <MusicCard
-              id={i.id}
-              songImage={i.songImage}
-              songName={i.songName}
-              singer={i.singer}
-            />
-          </Link>
+          <div key={i.id} className="flex relative">
+            <Link
+              to={{ pathname: `/music/${i.id}` }}
+              state={{ song: i, listSong: songLists }}
+            >
+              <MusicCard
+                id={i.id}
+                songImage={i.songImage}
+                songName={i.songName}
+                singer={i.singer}
+              />
+            </Link>
+            {!isPlaying ? (
+              <CircleButton
+                className={`
+                 bg-green-500 absolute right-5 top-28 w-10 h-10 box-shadow-300 transition-duration-200 hover:bg-green-600`}
+                onClick={async () => {
+                  await setSong(i);
+                  await handlePlaying();
+                }}
+              >
+                <ImPlay3
+                  size={20}
+                  className="text-black text-2xl absolute m-auto top-0 right-0 bottom-0 left-0 "
+                />
+              </CircleButton>
+            ) : (
+              <CircleButton
+                className={`
+                 bg-green-500 absolute right-5 top-28 w-10 h-10 box-shadow-300 transition-duration-200 hover:bg-green-600`}
+                onClick={async () => {
+                  await handlePausing();
+                }}
+              >
+                <GiPauseButton
+                  size={20}
+                  className="text-black  m-auto top-0 right-0 bottom-0 left-0 "
+                />
+              </CircleButton>
+            )}
+          </div>
         ))}
       </div>
     </div>

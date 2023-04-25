@@ -2,7 +2,7 @@ import supabase from "../configs/supabase";
 import { FcGoogle } from "react-icons/fc";
 import { SiDiscord, SiSpotify } from "react-icons/si";
 import { BsGithub } from "react-icons/bs";
-import Button from "../components/Button";
+import Button from "../components/shared/Button";
 
 const Login = () => {
   async function signInWithGoogle() {
@@ -39,21 +39,21 @@ const Login = () => {
           <div className="text-[40px] font-bold text-white">ĐĂNG NHẬP</div>
         </div>
         <Button
-          classNames="bg-green-600 w-[17rem] rounded-sm text-white flex justify-center items-center gap-4 hover:bg-green-800"
+          className="bg-green-600 w-[17rem] rounded-sm text-white flex justify-center items-center gap-4 hover:bg-green-800"
           onClick={signInWithSpotify}
         >
           <SiSpotify className="text-2xl " />
           <span>Login with Spotify</span>
         </Button>
         <Button
-          classNames="bg-white w-[17rem] text-black rounded-sm flex justify-center items-center gap-4 hover:bg-slate-300"
+          className="bg-white w-[17rem] text-black rounded-sm flex justify-center items-center gap-4 hover:bg-slate-300"
           onClick={signInWithGithub}
         >
           <BsGithub className="text-2xl"></BsGithub>
           <span>Login with GitHub</span>
         </Button>
         <Button
-          classNames="bg-red-700 w-[17rem] rounded-sm text-white flex justify-center items-center gap-4 hover:bg-red-900"
+          className="bg-red-700 w-[17rem] rounded-sm text-white flex justify-center items-center gap-4 hover:bg-red-900"
           onClick={signInWithGoogle}
         >
           <FcGoogle className="text-2xl"></FcGoogle>

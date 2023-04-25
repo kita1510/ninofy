@@ -1,5 +1,6 @@
 import chimuonbenem from "../assets/chimuonbenem.mp3";
 import saynang from "../assets/saynang.mp3";
+import orange7 from "../assets/Orange7.mp3"
 export const songLists = [
   {
     id: 1,
@@ -23,7 +24,7 @@ export const songLists = [
       "https://i.pinimg.com/564x/e4/8e/42/e48e424fbdf55e605d4fe873de49276c.jpg",
     songName: "テイン",
     singer: "Nino",
-    audio: saynang,
+    audio: orange7,
   },
   {
     id: 4,

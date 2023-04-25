@@ -1,62 +1,63 @@
-import React, { ChangeEvent, EventHandler, HTMLInputTypeAttribute, memo, MutableRefObject, useCallback, useEffect, useMemo, useRef } from "react";
+import React, {
+  ChangeEvent,
+  EventHandler,
+  HTMLInputTypeAttribute,
+  memo,
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
 import ReactAudioPlayer from "react-audio-player";
 import { useLocation } from "react-router-dom";
 import { GrPlayFill } from "react-icons/gr";
-import Button from "./Button";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import Button from "./shared/Button";
+import Navbar from "./patials/Navbar";
+import Sidebar from "./patials/Sidebar";
 import { AiOutlineEllipsis, AiOutlineHeart } from "react-icons/ai";
 import { BsFillPauseFill } from "react-icons/bs";
 import { useState } from "react";
 import ControllerBar from "./ControllerBar";
 import { numberToMinute } from "../utils/numberToTime";
 import chimuonbenem from "../assets/chimuonbenem.mp3";
+import { usePlayer } from "../contexts/PlayerContext";
+import CircleButton from "./shared/CircleButton";
 
 let songDuration = 0;
 
 const CardDetail = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const song = useLocation();
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isLoop, setIsLoop] = useState(false);
   const [progress, setProgress] = useState(0);
-  const audioRef = useRef<HTMLMediaElement>(null!);
   const [volume, setVolume] = useState(0.6);
 
+  const {
+    handlePlaying,
+    handlePausing,
+    isPlaying,
+    setSong,
+    song: s,
+    audioRef,
+  } = usePlayer();
+  console.log(audioRef);
   songDuration = audioRef.current?.duration;
 
-  console.log(audioRef);
-
-  function handlePlaying() {
-    audioRef.current?.play();
-    audioRef.current.onplay = () => {
-      setIsPlaying(true);
-    };
-    audioRef.current.ontimeupdate = () => {
-      setCurrentTime((prev) => (prev = audioRef.current?.currentTime));
-      // console.log(currentTime);
-    };
-  }
-
+  console.log(song);
+  console.log(s);
   const step = audioRef.current?.duration / 60 / 100;
   // console.log(1 / step);
   // console.log(currentTime );
 
-  function handlePausing() {
-    audioRef.current?.pause();
-    audioRef.current.onpause = () => {
-      setIsPlaying(false);
-    };
-  }
-
   function handleSeekTime(e: any) {
-    audioRef.current.currentTime = songDuration /100 * e.target?.value;
+    audioRef.current.currentTime = (songDuration / 100) * e.target?.value;
   }
 
   function mutedVolume() {
     setIsMuted(true);
-    setVolume(0)
+    setVolume(0);
   }
 
   function unMutedVolume() {
@@ -64,20 +65,18 @@ const CardDetail = () => {
     setVolume(0.5);
   }
 
-  function handleSeekVolume (e:any) {
-    audioRef.current.volume = e.target.value
-    setVolume(e.target.value)
-    audioRef.current.onvolumechange = () =>{
-    }
+  function handleSeekVolume(e: any) {
+    audioRef.current.volume = e.target.value;
+    setVolume(e.target.value);
+    audioRef.current.onvolumechange = () => {};
   }
 
-  function handleLoop (){
-    setIsLoop(!isLoop)
-    audioRef.current.loop = true
+  function handleLoop() {
+    setIsLoop(!isLoop);
+    audioRef.current.loop = true;
   }
 
-  console.log(song.state.song.audio)
-
+  // console.log(song.state.song.audio);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -113,19 +112,24 @@ const CardDetail = () => {
         </div>
         <div className="w-full absolute h-[200px] bg-gradient-to-b from-pink-600 via-pink-900 px-12 py-10">
           {!isPlaying ? (
-            <Button
-              classNames="w-[56px] h-[56px] rounded-full bg-green-400 absolute flex justify-center items-center hover:bg-green-300"
-              onClick={handlePlaying}
+            <CircleButton
+              className="w-[56px] h-[56px] bg-green-400 absolute hover:bg-green-300"
+              onClick={async () => {
+                await setSong(song.state.song);
+                await handlePlaying();
+              }}
             >
               <GrPlayFill className={``} size={20} />
-            </Button>
+            </CircleButton>
           ) : (
-            <Button
-              classNames="w-[56px] h-[56px] rounded-full bg-green-400 absolute flex justify-center items-center"
-              onClick={handlePausing}
+            <CircleButton
+              className="w-[56px] h-[56px] rounded-full bg-green-400 absolute flex justify-center items-center"
+              onClick={() => {
+                handlePausing();
+              }}
             >
               <BsFillPauseFill className={``} size={24} />
-            </Button>
+            </CircleButton>
           )}
           <AiOutlineHeart
             className="absolute left-36 top-12"
@@ -137,40 +141,7 @@ const CardDetail = () => {
             size={40}
             color={"white"}
           />
-          <audio
-            className="absolute top-20"
-            ref={audioRef}
-            src={song.state.song.audio}
-            muted={isMuted}
-            loop = {isLoop}
-            
-          />
         </div>
-      </div>
-      <div className="w-full h-[90px] fixed bottom-0 bg-spotify-200 border-t-[1px] border-slate-700 z-[099999]">
-        <ControllerBar
-          id={song.state.song.id}
-          songName={song.state.song.songName}
-          songImage={song.state.song.songImage}
-          singer={song.state.song.singer}
-          audio= {song.state.song.audio}
-          isPlaying={isPlaying}
-          isMuted={isMuted}
-          handlePlaying={handlePlaying}
-          handlePausing={handlePausing}
-          songDuration={songDuration}
-          currentTime={currentTime}
-          mutedVolume={mutedVolume}
-          unMutedVolume = {unMutedVolume}
-          audioRef={audioRef}
-          progress={progress}
-          volume = {volume}
-          handleSeekTime={handleSeekTime}
-          handleSeekVolume={handleSeekVolume}
-          handleLoop= {handleLoop}
-          isLoop = {isLoop}
-          step={step}
-        ></ControllerBar>
       </div>
     </div>
   );

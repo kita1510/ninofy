@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../components/Container";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+import Navbar from "../components/patials/Navbar";
+import Sidebar from "../components/patials/Sidebar";
 
 const SearchPage = () => {
   return (
