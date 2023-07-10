@@ -1,18 +1,11 @@
 import React from "react";
-import Container from "../components/Container";
-import Navbar from "../components/patials/Navbar";
-import Sidebar from "../components/patials/Sidebar";
+import Layout from "../components/layouts/Layout";
 
 const SearchPage = () => {
   return (
-    <div className="flex">
-      <div className="w-[30%] fixed">
-        <Sidebar />
-      </div>
-      <div className="w-[80%] absolute right-0">
-        <Navbar active={true} isSearch={true} />
-      </div>
-    </div>
+    <React.Fragment>
+      <Layout></Layout>
+    </React.Fragment>
   );
 };
 

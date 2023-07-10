@@ -22,7 +22,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   const [song, setSong] = useState();
   let songDuration = 0;
 
-  //   songDuration = audioRef.current?.duration;
+  songDuration = audioRef.current?.duration;
 
   //   console.log(audioRef);
 
@@ -84,6 +84,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
         isPlaying,
         currentTime,
         handlePlaying,
+        songDuration,
         // step,
         handlePausing,
         handleSeekTime,
@@ -94,6 +95,9 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
         audioRef,
         currentSong,
         setSong,
+        volume,
+        isLoop,
+        isMuted,
       }}
     >
       {children}

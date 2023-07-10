@@ -1,8 +1,14 @@
 /** @format */
 
-import { User } from '@supabase/supabase-js';
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import supabase from '../configs/supabase';
+import { User } from "@supabase/supabase-js";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import supabase from "../lib/supabase";
 
 const AuthContext = createContext<User | null>(null!);
 

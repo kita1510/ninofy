@@ -6,14 +6,14 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { MdNavigateNext } from "react-icons/md";
 import { FiSearch } from "react-icons/fi";
 import { FcPrevious } from "react-icons/fc";
-import supabase from "../../configs/supabase";
+import supabase from "../../lib/supabase";
 import { User } from "@supabase/supabase-js";
 import Button from "../shared/Button";
 import { Link } from "react-router-dom";
 import { useUser } from "../../contexts/AuthContext";
 import { formatName } from "../../utils/format";
 
-const Navbar = ({
+const Header = ({
   active,
   isSearch,
 }: {
@@ -49,9 +49,7 @@ const Navbar = ({
             <input
               className="w-64 h-full focus:outline-none text-sm"
               placeholder="What do you want to listen to?"
-              onClick={()=>{
-                
-              }}
+              onClick={() => {}}
             />
             <GrClose className="w-6 h-6 mr-3" />
           </div>
@@ -104,4 +102,4 @@ const Navbar = ({
   );
 };
 
-export default Navbar;
+export default Header;
