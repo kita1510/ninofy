@@ -8,6 +8,7 @@ import Button from "../components/shared/Button";
 const Login = () => {
   const handleSignIn = (provider: Provider) => async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({ provider });
+    console.log(error);
   };
   return (
     <div className="w-full h-[768px] bg-black font-semibold flex relative">
@@ -21,7 +22,7 @@ const Login = () => {
       <div className="w-2/3 flex items-center justify-center flex-col gap-6 bg-stone-800 ">
         <Button
           className="bg-green-600 w-[17rem] rounded-sm text-white flex justify-center items-center gap-4 hover:bg-green-800"
-          onClick={handleSignIn("spotify")}
+          onClick={handleSignIn("github")}
         >
           <SiSpotify className="text-2xl " />
           <span>Login with Spotify</span>

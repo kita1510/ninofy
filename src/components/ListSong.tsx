@@ -12,33 +12,8 @@ import CircleButton from "./shared/CircleButton";
 import MusicCard from "./shared/MusicCard";
 
 const ListSong = () => {
-  const [artists, setArtists] = useState("");
   const { isPlaying, setSong, currentSong, handlePlaying, handlePausing } =
     usePlayer();
-  const accessToken = useAccessToken();
-  var artistParameters = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + accessToken,
-    },
-  };
-
-  // console.log(accessToken);
-
-  async function search() {
-    var artistID = await fetch(
-      "https://api.spotify.com/v1/search?q=" + "Taylor" + "&type=artist",
-      artistParameters
-    )
-      .then((res) => res.json())
-      .then((res) => setArtists(res));
-  }
-
-  useEffect(() => {
-    search();
-  }, []);
-
   // console.log(artists);
 
   return (

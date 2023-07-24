@@ -13,9 +13,9 @@ const Layout = ({ children }: { children?: ReactNode }) => {
         <Navbar active={true} isSearch={false} />
         {children}
       </div>
-      <div className="w-full h-[90px] fixed bottom-0 z-[999999] bg-spotify-200 border-t-[1px] border-slate-700 ">
+      {/* <div className="w-full h-[90px] fixed bottom-0 z-[999999] bg-spotify-200 border-t-[1px] border-slate-700 ">
         <ControllerBar />
-      </div>
+      </div> */}
     </div>
   );
 };

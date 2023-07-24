@@ -10,6 +10,7 @@ import { useRef, useState } from "react";
 import Button from "../shared/Button";
 import { usePlayer } from "../../contexts/PlayerContext";
 import { numberToMinute } from "../../utils/numberToTime";
+import InputRange from 'react-input-range';
 
 const ControllerBar = () => {
   const {
