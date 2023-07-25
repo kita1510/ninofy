@@ -8,7 +8,7 @@ import React, {
 } from "react";
 import { SongProps } from "../types";
 
-const PlayerContext = createContext<SongProps>(null);
+const PlayerContext = createContext<SongProps>(null!);
 
 const PlayerProvider = ({ children }: { children: ReactNode }) => {
   const [currentTime, setCurrentTime] = useState(0);
@@ -18,7 +18,8 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLMediaElement>(null!);
   const [volume, setVolume] = useState(1);
-  const [currentSong, setCurrentSong] = useState();
+  const [currentSong, setCurrentSong] =
+    useState<React.MutableRefObject<HTMLMediaElement>>();
   const [song, setSong] = useState();
   let songDuration = 0;
 

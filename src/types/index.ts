@@ -3,6 +3,7 @@ import { ChangeEvent } from "react";
 
 export interface SongProps {
   id: number;
+  song: string;
   songImage: string;
   songName: string;
   singer: string;
@@ -25,7 +26,7 @@ export interface SongProps {
   step: number;
 }
 
-export type AuthUser = User & {
-  avatar_url : string;
+export type AdditionalUser = User & {
+  avatar_url: string;
   username: string;
 };

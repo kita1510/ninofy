@@ -8,15 +8,15 @@ import React, {
   useState,
 } from "react";
 import supabase from "../lib/supabase";
-import { AuthUser } from "../types";
+import { AdditionalUser } from "../types";
 import { useCookies } from "react-cookie";
-const AuthContext = createContext<AuthUser | null>(null!);
+const AuthContext = createContext<AdditionalUser | null>(null!);
 
 const accessTokenCookieName = "sb-access-token";
 const refreshTokenCookieName = "sb-refresh-token";
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<AuthUser>(null!);
+  const [user, setUser] = useState<AdditionalUser>(null!);
   const [accessTokenCookies, setAccessTokenCookie, removeAccessTokenCookie] =
     useCookies([accessTokenCookieName]);
   const [refreshTokenCookies, setRefreshTokenCookie, removeRefreshTokenCookie] =

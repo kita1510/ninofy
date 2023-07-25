@@ -26,7 +26,6 @@ const ListSong = () => {
           Show all
         </div>
       </div>
-      <div></div>
       <div className="flex gap-6 ">
         {songLists.map((i) => (
           <div key={i.id} className="flex relative">
