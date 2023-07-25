@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import supabase from "../lib/supabase";
 import { AuthUser } from "../types";
-import { useCookies, Cookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 const AuthContext = createContext<AuthUser | null>(null!);
 
 const accessTokenCookieName = "sb-access-token";
@@ -17,8 +17,10 @@ const refreshTokenCookieName = "sb-refresh-token";
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AuthUser>(null!);
-  const accessCookie = useCookies([accessTokenCookieName]);
-  const refreshCookie = useCookies([refreshTokenCookieName]);
+  const [accessTokenCookies, setAccessTokenCookie, removeAccessTokenCookie] =
+    useCookies([accessTokenCookieName]);
+  const [refreshTokenCookies, setRefreshTokenCookie, removeRefreshTokenCookie] =
+    useCookies([refreshTokenCookieName]);
 
   // Check cookies
   useEffect(() => {
@@ -29,8 +31,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       } = await supabase.auth.getSession();
       if (!session || currentDate.getMilliseconds() >= session.expires_at!) {
         setUser(null!);
-        accessCookie[2](accessTokenCookieName);
-        refreshCookie[2](refreshTokenCookieName);
+        removeAccessTokenCookie(accessTokenCookieName);
+        removeRefreshTokenCookie(refreshTokenCookieName);
       }
     };
     getSession();
@@ -59,8 +61,8 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     supabase.auth.onAuthStateChange(async (event, session) => {
       if (!session) {
         setUser(null!);
-        accessCookie[2](accessTokenCookieName);
-        refreshCookie[2](refreshTokenCookieName);
+        removeAccessTokenCookie(accessTokenCookieName);
+        removeRefreshTokenCookie(refreshTokenCookieName);
         return;
       }
       const {
@@ -81,13 +83,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
       const token = session.access_token;
       const refreshToken = session.refresh_token;
 
-      accessCookie[2](accessTokenCookieName);
-      accessCookie[1](accessTokenCookieName, token, {
+      removeAccessTokenCookie(accessTokenCookieName);
+      setAccessTokenCookie(accessTokenCookieName, token, {
         maxAge: 604800,
         path: "/",
       });
-      refreshCookie[2](refreshTokenCookieName);
-      refreshCookie[1](refreshTokenCookieName, refreshToken, {
+      removeRefreshTokenCookie(refreshTokenCookieName);
+      setRefreshTokenCookie(refreshTokenCookieName, refreshToken, {
         maxAge: 604800,
         path: "/",
       });
