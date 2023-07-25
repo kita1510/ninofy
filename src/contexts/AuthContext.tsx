@@ -1,6 +1,5 @@
 /** @format */
 
-import { User } from "@supabase/supabase-js";
 import React, {
   createContext,
   ReactNode,
@@ -9,22 +8,48 @@ import React, {
   useState,
 } from "react";
 import supabase from "../lib/supabase";
+import { AuthUser } from "../types";
 
-const AuthContext = createContext<User | null>(null!);
+const AuthContext = createContext<AuthUser | null>(null!);
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null!);
+  const [user, setUser] = useState<AuthUser>(null!);
 
   useEffect(() => {
+    const getUser = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) return null;
+
+      const { data: profileUser } = await supabase
+        .from("users")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+      setUser(profileUser);
+    };
     getUser();
   }, []);
 
-  async function getUser() {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    setUser(user);
-  }
+  useEffect(() => {
+    supabase.auth.onAuthStateChange(async (event, session) => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (event === "SIGNED_OUT") {
+        setUser(null);
+      } else if (event === "SIGNED_IN") {
+        const { data: profileUser } = await supabase
+          .from("users")
+          .select("*")
+          .eq("id", user?.id)
+          .single();
+        setUser(profileUser);
+      }
+    });
+  });
 
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 };

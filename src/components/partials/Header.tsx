@@ -9,9 +9,10 @@ import { FcPrevious } from "react-icons/fc";
 import supabase from "../../lib/supabase";
 import { User } from "@supabase/supabase-js";
 import Button from "../shared/Button";
-import { Link } from "react-router-dom";
+import { Link, useParams, useRoutes, useLocation } from "react-router-dom";
 import { useUser } from "../../contexts/AuthContext";
 import { formatName } from "../../utils/format";
+import HeaderProfile from "../shared/HeaderProfile";
 
 const Header = ({
   active,
@@ -20,10 +21,11 @@ const Header = ({
   active: boolean;
   isSearch: boolean;
 }) => {
-  const [toggle, setToggle] = useState(false);
   const [isScrool, setIsScrool] = useState(false);
-
   const user = useUser();
+  const router = useParams();
+
+  console.log(router);
 
   window.onscroll = () => {
     setIsScrool(window.scrollY === 0 ? false : true);
@@ -56,47 +58,14 @@ const Header = ({
         )}
       </div>
 
-      {!user ? (
+      {user ? (
+        <HeaderProfile />
+      ) : (
         <Link to="/login" className="absolute left-[900px]">
           <Button className="w-28 h-9 rounded-lg bg-white  font-bold text-center leading-9 cursor-pointer">
             Login
           </Button>
         </Link>
-      ) : (
-        <div
-          className="absolute left-[900px] "
-          onClick={() => setToggle(!toggle)}
-        >
-          <button className="w-28 h-9 rounded-full bg-spotify-200 flex justify-around items-center">
-            <img
-              className="w-8 h-8 rounded-full bg-spotify-300 flex justify-center items-center"
-              src={user?.user_metadata?.avatar_url}
-            />
-            <span className="text-white text-sm font-bold">
-              {formatName(user?.user_metadata?.name)}
-            </span>
-            {toggle ? (
-              <IoMdArrowDropup className="text-white text-[24px]" />
-            ) : (
-              <IoMdArrowDropdown className="text-white text-[24px]" />
-            )}
-          </button>
-          {toggle && (
-            <div className="w-48 h-20 top-[50px] absolute right-0 bg-spotify-500 z-50 cursor-pointer">
-              <div className="p-1 flex flex-col">
-                <div
-                  className="h-10 pl-3 hover:bg-spotify-200 text-white leading-10"
-                  onClick={async () => {
-                    await supabase.auth.signOut();
-                    window.location.reload();
-                  }}
-                >
-                  Log out
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
       )}
     </div>
   );
