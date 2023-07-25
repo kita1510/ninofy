@@ -6,8 +6,13 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { SongProps } from "../types";
+import { PERCENT } from "../constants";
+import { SongProps, Track } from "../types";
 
+type State = {
+  state: Track;
+  setState: React.Dispatch<React.SetStateAction<Track | undefined>>;
+};
 const PlayerContext = createContext<SongProps>(null!);
 
 const PlayerProvider = ({ children }: { children: ReactNode }) => {
@@ -20,7 +25,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   const [volume, setVolume] = useState(1);
   const [currentSong, setCurrentSong] =
     useState<React.MutableRefObject<HTMLMediaElement>>();
-  const [song, setSong] = useState();
+  const [song, setSong] = useState<State>();
   let songDuration = 0;
 
   songDuration = audioRef.current?.duration;
@@ -33,7 +38,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
       setIsPlaying(true);
     };
     audioRef.current.ontimeupdate = () => {
-      setCurrentTime((prev) => (prev = audioRef.current?.currentTime));
+      setCurrentTime((prev) => (prev = audioRef.current.currentTime));
       // console.log(currentTime);
     };
     setCurrentSong(audioRef);
@@ -51,7 +56,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   }
 
   function handleSeekTime(e: any) {
-    audioRef.current.currentTime = (songDuration / 100) * e.target?.value;
+    audioRef.current.currentTime = (songDuration / PERCENT) * e.target.value;
   }
 
   function mutedVolume() {

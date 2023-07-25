@@ -1,44 +1,49 @@
 import chimuonbenem from "../assets/chimuonbenem.mp3";
 import saynang from "../assets/saynang.mp3";
-import orange7 from "../assets/Orange7.mp3"
-export const songLists = [
+import orange7 from "../assets/Orange7.mp3";
+import { Track } from "../types";
+import { v4 as uuidv4 } from "uuid";
+
+const id = uuidv4().slice(0, 10);
+
+export const songLists: Track[] = [
   {
     id: 1,
-    songImage:
+    images:
       "https://i.pinimg.com/564x/7f/42/08/7f4208fed16f7c97306dbb0ff992d3d1.jpg",
-    songName: "Candy Pop",
+    title: "Candy Pop",
     singer: "Yui Yuigahama",
     audio: chimuonbenem,
   },
   {
     id: 2,
-    songImage:
+    images:
       "https://i.pinimg.com/564x/b5/25/ca/b525cafaa10f9dfbfcbd19c2718a3464.jpg",
-    songName: "アイン",
+    title: "アイン",
     singer: "Nino",
     audio: saynang,
   },
   {
     id: 3,
-    songImage:
+    images:
       "https://i.pinimg.com/564x/e4/8e/42/e48e424fbdf55e605d4fe873de49276c.jpg",
-    songName: "テイン",
+    title: "テイン",
     singer: "Nino",
     audio: orange7,
   },
   {
     id: 4,
-    songImage:
+    images:
       "https://i.pinimg.com/564x/53/fd/23/53fd23bcc4c54c18ebedb316fc2d7dc0.jpg",
-    songName: "Bitter Sweet",
+    title: "Bitter Sweet",
     singer: "Yui Yuigahama",
     audio: saynang,
   },
   {
     id: 5,
-    songImage:
+    images:
       "https://i.pinimg.com/564x/7f/c6/b8/7fc6b8a4291b7acd7d959ec0dcce16f6.jpg",
-    songName: "アイン",
+    title: "アイン",
     singer: "Yui Yuigahama",
     audio: chimuonbenem,
   },

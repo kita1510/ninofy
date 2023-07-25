@@ -3,13 +3,10 @@ import { ChangeEvent } from "react";
 
 export interface SongProps {
   id: number;
-  song: string;
-  songImage: string;
-  songName: string;
-  singer: string;
-  audio: string;
   isPlaying: boolean;
   isMuted: boolean;
+  song: Track ;
+  setSong: React.Dispatch<React.SetStateAction<Track>>;
   handlePlaying: () => void;
   handlePausing: () => void;
   songDuration: number;
@@ -19,8 +16,8 @@ export interface SongProps {
   audioRef: any;
   progress: number;
   volume: number;
-  handleSeekTime: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleSeekVolume: (e: any) => void;
+  handleSeekTime: (e: React.FormEvent<HTMLInputElement>) => void;
+  handleSeekVolume: (e: ChangeEvent<HTMLInputElement>) => void;
   handleLoop: () => void;
   isLoop: boolean;
   step: number;
@@ -30,3 +27,15 @@ export type AdditionalUser = User & {
   avatar_url: string;
   username: string;
 };
+
+export interface Track {
+  id: string | number;
+  title: string;
+  album?: string;
+  duration?: string;
+  genre?: string;
+  images: string;
+  singer: string;
+  audio: string;
+  artist?: string;
+}

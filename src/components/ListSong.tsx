@@ -5,15 +5,12 @@ import { GiPauseButton } from "react-icons/gi";
 import { ImPlay3 } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { usePlayer } from "../contexts/PlayerContext";
-import { useAccessToken } from "../contexts/SpotifyContext";
 import { songLists } from "../utils/dummyData";
-import Button from "./shared/Button";
 import CircleButton from "./shared/CircleButton";
 import MusicCard from "./shared/MusicCard";
 
 const ListSong = () => {
-  const { isPlaying, setSong, currentSong, handlePlaying, handlePausing } =
-    usePlayer();
+  const { isPlaying, setSong, handlePlaying, handlePausing } = usePlayer();
   // console.log(artists);
 
   return (
@@ -35,9 +32,10 @@ const ListSong = () => {
             >
               <MusicCard
                 id={i.id}
-                songImage={i.songImage}
-                songName={i.songName}
+                title={i.title}
+                audio={i.audio}
                 singer={i.singer}
+                images={i.images}
               />
             </Link>
             {!isPlaying ? (

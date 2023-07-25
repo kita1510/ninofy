@@ -10,14 +10,15 @@ import { useRef, useState } from "react";
 import Button from "../shared/Button";
 import { usePlayer } from "../../contexts/PlayerContext";
 import { numberToMinute } from "../../utils/numberToTime";
-import InputRange from 'react-input-range';
+import RangeInput from "../shared/RangeInput";
+
+const PERCENT = 100;
 
 const ControllerBar = () => {
   const {
     isPlaying,
     handlePlaying,
     handlePausing,
-    currentSong,
     song,
     currentTime,
     audioRef,
@@ -32,7 +33,6 @@ const ControllerBar = () => {
     handleSeekVolume,
   } = usePlayer();
   // const audioRef = useRef();
-  // let songDuration = 0;
 
   // songDuration = audioRef.current?.duration;
   console.log(volume);
@@ -41,12 +41,12 @@ const ControllerBar = () => {
       <div className="flex items-center gap-4 w-[30%]">
         <img
           className="w-14 h-14 cursor-pointer object-cover object-center"
-          src={song?.songImage}
+          src={song?.images}
           alt=""
         />
         <div>
           <div className="font-bold text-white cursor-pointer hover:underline">
-            {song?.songName}
+            {song?.title}
           </div>
           <div className="text-white font-[400] opacity-70 text-[12px] cursor-pointer hover:underline">
             {song?.singer}
@@ -113,14 +113,10 @@ const ControllerBar = () => {
           <div className="text-white text-sm">
             {numberToMinute(currentTime)}
           </div>
-          <input
-            className="h-1 w-96 cursor-pointer"
-            type="range"
-            min={"0"}
-            step={`1`}
-            max={"100"}
-            value={(currentTime / songDuration) * 100}
+          <RangeInput
+            value={(currentTime / songDuration) * PERCENT}
             onChange={(e) => handleSeekTime(e)}
+            className={"h-1 w-96"}
           />
           <div className="text-white text-sm">
             {numberToMinute(songDuration)}
@@ -157,14 +153,10 @@ const ControllerBar = () => {
               onClick={unMutedVolume}
             />
           )}
-          <input
-            className="h-1 w-28 cursor-pointer"
-            type="range"
-            min={"0"}
-            step={"0.05"}
-            max={"1"}
+          <RangeInput
             value={volume}
             onChange={(e) => handleSeekVolume(e)}
+            className={"h-1 w-28"}
           />
           <audio
             className="absolute top-20"

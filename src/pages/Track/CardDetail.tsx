@@ -18,8 +18,6 @@ const CardDetail = () => {
     audioRef,
   } = usePlayer();
 
-  const step = audioRef.current?.duration / 60 / 100;
-
   async function playSong() {
     await setSong(song.state.song);
     await handlePlaying();
@@ -37,7 +35,7 @@ const CardDetail = () => {
         <div className="h-full">
           <img
             className="w-52 h-52 rounded-full absolute bottom-14 left-14 object-cover object-center"
-            src={song.state.song.songImage}
+            src={song.state.song.images}
             alt=""
           />
         </div>
@@ -46,7 +44,7 @@ const CardDetail = () => {
             Song
           </div>
           <div className="absolute bottom-32 left-10 font-bold text-[50px] text-white ">
-            {song.state.song.songName}
+            {song.state.song.title}
           </div>
           <div className="absolute bottom-10 left-5 font-semibold text-1xl text-white ">
             {song.state.song.singer}
