@@ -28,6 +28,7 @@ const RangeInput: React.FC<RangeInputProps> = ({
       max={`${max}`}
       value={value}
       onChange={onChange}
+      defaultValue={"0"}
       {...props}
     />
   );

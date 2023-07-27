@@ -2,19 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import { GrNext, GrPrevious, GrFormNext, GrClose } from "react-icons/gr";
-import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { MdNavigateNext } from "react-icons/md";
 import { FiSearch } from "react-icons/fi";
-import { FcPrevious } from "react-icons/fc";
-import supabase from "../../lib/supabase";
-import { User } from "@supabase/supabase-js";
 import Button from "../shared/Button";
-import { Link, useParams, useRoutes, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useUser } from "../../contexts/AuthContext";
-import { formatName } from "../../utils/format";
 import HeaderProfile from "../shared/HeaderProfile";
 import Loading from "../../icons/Loading";
 import CircleButton from "../shared/CircleButton";
+import clsx from "clsx";
+import TransLink from "../shared/TransLink";
 
 const Header = ({
   active,
@@ -25,9 +22,6 @@ const Header = ({
 }) => {
   const [isScrool, setIsScrool] = useState(false);
   const user = useUser();
-  const router = useParams();
-
-  console.log(router);
 
   window.onscroll = () => {
     setIsScrool(window.scrollY === 0 ? false : true);
@@ -35,10 +29,11 @@ const Header = ({
 
   return (
     <div
-      className={`w-full h-16 ${
-        active && isScrool ? "bg-spotify-100" : "bg-transparent"
-      } 
-       transition-duration-400 flex items-center px-8 justify-between fixed z-20`}
+      className={clsx(
+        `w-full h-16`,
+        active && isScrool ? "bg-spotify-100" : "bg-transparent",
+        "transition-duration-400 flex items-center px-8 justify-between fixed z-20"
+      )}
     >
       <div className="flex gap-4">
         <CircleButton
@@ -67,11 +62,11 @@ const Header = ({
       {user ? (
         <HeaderProfile />
       ) : (
-        <Link to="/login" className="absolute left-[900px]">
+        <TransLink to="/login" className="absolute left-[900px]">
           <Button className="w-28 h-9 rounded-lg bg-white  font-bold text-center leading-9 cursor-pointer">
             Login
           </Button>
-        </Link>
+        </TransLink>
       )}
     </div>
   );

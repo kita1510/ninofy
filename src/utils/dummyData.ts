@@ -1,6 +1,7 @@
 import chimuonbenem from "../assets/chimuonbenem.mp3";
 import saynang from "../assets/saynang.mp3";
 import orange7 from "../assets/Orange7.mp3";
+import neverforget from "../assets/neverforget.mp3";
 import { Track } from "../types";
 import { v4 as uuidv4 } from "uuid";
 
@@ -34,10 +35,10 @@ export const songLists: Track[] = [
   {
     id: 4,
     images:
-      "https://i.pinimg.com/564x/53/fd/23/53fd23bcc4c54c18ebedb316fc2d7dc0.jpg",
-    title: "Bitter Sweet",
-    singer: "Yui Yuigahama",
-    audio: saynang,
+      "https://i.pinimg.com/564x/95/21/53/95215324bc6f145240582f0e58cb5dfd.jpg",
+    title: "忘れてやらない",
+    singer: "Kesouku Band",
+    audio: neverforget,
   },
   {
     id: 5,

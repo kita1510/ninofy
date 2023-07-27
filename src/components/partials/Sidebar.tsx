@@ -60,8 +60,8 @@ const Sidebar = () => {
         </Link>
       </div>
       <div className="text-spotify-400 flex flex-col gap-3">
-        {routes.map((route) => (
-          <Link to={route.to}>
+        {routes.map((route,index) => (
+          <Link to={route.to} key={index}>
             <div className={clsx("flex items-center gap-4 cursor-pointer hover:text-white", route.space ? "mt-7" : "")}>
               {route.icon}
               <span className="text-xs font-bold">{route.page}</span>

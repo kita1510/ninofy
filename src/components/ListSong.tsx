@@ -1,10 +1,10 @@
-/** @format */
-
-import React, { useEffect, useState } from "react";
+import clsx from "clsx";
+import React, { useEffect, useMemo, useState } from "react";
 import { GiPauseButton } from "react-icons/gi";
 import { ImPlay3 } from "react-icons/im";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { usePlayer } from "../contexts/PlayerContext";
+import { Track } from "../types";
 import { songLists } from "../utils/dummyData";
 import CircleButton from "./shared/CircleButton";
 import MusicCard from "./shared/MusicCard";
@@ -12,6 +12,40 @@ import MusicCard from "./shared/MusicCard";
 const ListSong = () => {
   const { isPlaying, setSong, handlePlaying, handlePausing } = usePlayer();
   // console.log(artists);
+  const navigate = useNavigate();
+  const [isMouseHover, setIsMouseHover] = useState(false);
+
+  const iconClass = !isPlaying ? ImPlay3 : GiPauseButton;
+
+  useEffect(() => {
+    if (isPlaying) {
+      setIsMouseHover(true);
+    } else {
+      setIsMouseHover(false);
+    }
+  }, [isPlaying]);
+
+  console.log(isMouseHover);
+
+  const handleMouseHover = (boolean: boolean) => () => {
+    setIsMouseHover(boolean);
+  };
+
+  const memoizedHandleMouseOver = useMemo(() => handleMouseHover(true), []);
+  const memoizedHandleMouseLeave = useMemo(() => handleMouseHover(false), []);
+
+  const setTrackToPlay = (track: Track) => async () => {
+    if (!isPlaying) {
+      await setSong(track);
+      handlePlaying();
+    } else {
+      handlePausing();
+    }
+  };
+
+  const handleClick = (t: Track) => {
+    navigate(`/music/${t.id}`);
+  };
 
   return (
     <div className="flex gap-6 flex-col ">
@@ -24,48 +58,31 @@ const ListSong = () => {
         </div>
       </div>
       <div className="flex gap-6 ">
-        {songLists.map((i) => (
-          <div key={i.id} className="flex relative">
-            <Link
-              to={{ pathname: `/music/${i.id}` }}
-              state={{ song: i, listSong: songLists }}
-            >
-              <MusicCard
-                id={i.id}
-                title={i.title}
-                audio={i.audio}
-                singer={i.singer}
-                images={i.images}
-              />
-            </Link>
-            {!isPlaying ? (
-              <CircleButton
-                className={`
-                 bg-green-500 absolute right-5 top-28 w-10 h-10 box-shadow-300 hidden transition-duration-200 hover:bg-green-600`}
-                onClick={async () => {
-                  await setSong(i);
-                  await handlePlaying();
-                }}
-              >
-                <ImPlay3
-                  size={20}
-                  className="text-black text-2xl absolute m-auto top-0 right-0 bottom-0 left-0 "
-                />
-              </CircleButton>
-            ) : (
-              <CircleButton
-                className={`
-                 bg-green-500 absolute right-5 top-28 w-10 h-10 box-shadow-300 transition-duration-200 hover:bg-green-600`}
-                onClick={async () => {
-                  await handlePausing();
-                }}
-              >
-                <GiPauseButton
-                  size={20}
-                  className="text-black  m-auto top-0 right-0 bottom-0 left-0 "
-                />
-              </CircleButton>
-            )}
+        {songLists.map((t) => (
+          <div key={t.id} className="flex relative">
+            {/* <Link
+              style={{ pointerEvents: "visible" }}
+              to={{ pathname: `/music/${t.id}` }}
+              state={{ song: t, listSong: songLists }}
+            > */}
+            <MusicCard
+              onClick={() => handleClick(t)}
+              track={t}
+              onMouseEnter={() => setIsMouseHover(true)}
+              // onMouseLeave={() => setIsMouseHover(false)}
+            />
+            {/* </Link> */}
+            <CircleButton
+              className={clsx(
+                `
+                bg-green-500 z-[88888] absolute right-5 top-32 w-10 h-10`,
+                isMouseHover ? "block" : "hidden"
+              )}
+              // onMouseEnter={handleMouseHover(true)}
+              onClick={setTrackToPlay(t)}
+              LeftIcon={iconClass}
+              iconClassName="text-black text-2xl absolute m-auto top-0 right-0 bottom-0 left-0"
+            />
           </div>
         ))}
       </div>

@@ -8,6 +8,8 @@ import Button from "./Button";
 const HeaderProfile = () => {
   const [toggle, setToggle] = useState(false);
 
+  const iconType = toggle ? IoMdArrowDropup : IoMdArrowDropdown;
+
   const user = useUser();
 
   if (!user) return null;
@@ -15,7 +17,7 @@ const HeaderProfile = () => {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
   };
-  console.log(user);
+  // console.log(user);
 
   const handleToggle = () => {
     setToggle(!toggle);
@@ -25,7 +27,7 @@ const HeaderProfile = () => {
     <div className="absolute left-[900px] " onClick={handleToggle}>
       <Button
         className="w-28 h-9 rounded-full bg-spotify-200 flex justify-around items-center "
-        RightIcon={toggle ? IoMdArrowDropup : IoMdArrowDropdown}
+        RightIcon={iconType}
         iconClassName="text-white text-[24px]"
       >
         <div className="flex items-center gap-2">

@@ -15,7 +15,7 @@ import { CookiesProvider } from "react-cookie";
 const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <ThemeProvider>
       <QueryClientProvider client={client}>
         <CookiesProvider>
@@ -31,5 +31,5 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         </CookiesProvider>
       </QueryClientProvider>
     </ThemeProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
