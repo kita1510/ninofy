@@ -16,7 +16,7 @@ export interface SongProps {
   audioRef: any;
   progress: number;
   volume: number;
-  handleSeekTime: (e: React.FormEvent<HTMLInputElement>) => void;
+  handleSeekTime: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSeekVolume: (e: ChangeEvent<HTMLInputElement>) => void;
   handleLoop: () => void;
   isLoop: boolean;

@@ -1,4 +1,5 @@
 import React, {
+  ChangeEvent,
   createContext,
   ReactNode,
   useContext,
@@ -22,7 +23,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   const [isLoop, setIsLoop] = useState(false);
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLMediaElement>(null!);
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(0.5);
   const [currentSong, setCurrentSong] =
     useState<React.MutableRefObject<HTMLMediaElement>>();
   const [song, setSong] = useState<State>();
@@ -38,7 +39,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
       setIsPlaying(true);
     };
     audioRef.current.ontimeupdate = () => {
-      setCurrentTime((prev) => (prev = audioRef.current.currentTime));
+      setCurrentTime(audioRef.current.currentTime);
       // console.log(currentTime);
     };
     setCurrentSong(audioRef);

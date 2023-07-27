@@ -11,8 +11,7 @@ import Button from "../shared/Button";
 import { usePlayer } from "../../contexts/PlayerContext";
 import { numberToMinute } from "../../utils/numberToTime";
 import RangeInput from "../shared/RangeInput";
-
-const PERCENT = 100;
+import { PERCENT } from "../../constants";
 
 const ControllerBar = () => {
   const {
@@ -71,12 +70,7 @@ const ControllerBar = () => {
             size={40}
           />
           {!isPlaying ? (
-            <Button
-              className="p-2"
-              onClick={() => {
-                handlePlaying();
-              }}
-            >
+            <Button className="p-2" onClick={handlePlaying}>
               <BsPlayCircleFill
                 className=" hover:opacity-100"
                 color="white"
@@ -84,12 +78,7 @@ const ControllerBar = () => {
               />
             </Button>
           ) : (
-            <Button
-              className="p-2"
-              onClick={() => {
-                handlePausing();
-              }}
-            >
+            <Button className="p-2" onClick={handlePausing}>
               <BsPauseCircleFill
                 className=" hover:opacity-100"
                 color="white"
@@ -117,6 +106,9 @@ const ControllerBar = () => {
             value={(currentTime / songDuration) * PERCENT}
             onChange={(e) => handleSeekTime(e)}
             className={"h-1 w-96"}
+            min={0}
+            max={100}
+            step={1}
           />
           <div className="text-white text-sm">
             {numberToMinute(songDuration)}
@@ -157,6 +149,9 @@ const ControllerBar = () => {
             value={volume}
             onChange={(e) => handleSeekVolume(e)}
             className={"h-1 w-28"}
+            min={0}
+            max={1}
+            step={0.01}
           />
           <audio
             className="absolute top-20"
