@@ -6,12 +6,11 @@ import { BsPlayCircleFill, BsPauseCircleFill } from "react-icons/bs";
 import { ImLoop2 } from "react-icons/im";
 import { HiQueueList } from "react-icons/hi2";
 import { FiVolume1, FiVolume2, FiVolumeX } from "react-icons/fi";
-import { useRef, useState } from "react";
-import Button from "../shared/Button";
 import { usePlayer } from "../../contexts/PlayerContext";
 import { numberToMinute } from "../../utils/numberToTime";
 import RangeInput from "../shared/RangeInput";
 import { PERCENT } from "../../constants";
+import CircleButton from "../shared/CircleButton";
 
 const ControllerBar = () => {
   const {
@@ -70,21 +69,19 @@ const ControllerBar = () => {
             size={40}
           />
           {!isPlaying ? (
-            <Button className="p-2" onClick={handlePlaying}>
-              <BsPlayCircleFill
-                className=" hover:opacity-100"
-                color="white"
-                size={35}
-              />
-            </Button>
+            <CircleButton
+              className="p-2"
+              LeftIcon={BsPlayCircleFill}
+              onClick={handlePlaying}
+              iconClassName="hover:opacity-100 text-white w-12 h-12"
+            />
           ) : (
-            <Button className="p-2" onClick={handlePausing}>
-              <BsPauseCircleFill
-                className=" hover:opacity-100"
-                color="white"
-                size={35}
-              />
-            </Button>
+            <CircleButton
+              className="p-2"
+              onClick={handlePausing}
+              LeftIcon={BsPauseCircleFill}
+              iconClassName="hover:opacity-100 text-white w-12 h-12"
+            />
           )}
           <BiSkipNext
             className="opacity-80 hover:opacity-100"

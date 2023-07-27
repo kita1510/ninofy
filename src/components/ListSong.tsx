@@ -41,7 +41,7 @@ const ListSong = () => {
             {!isPlaying ? (
               <CircleButton
                 className={`
-                 bg-green-500 absolute right-5 top-28 w-10 h-10 box-shadow-300 transition-duration-200 hover:bg-green-600`}
+                 bg-green-500 absolute right-5 top-28 w-10 h-10 box-shadow-300 hidden transition-duration-200 hover:bg-green-600`}
                 onClick={async () => {
                   await setSong(i);
                   await handlePlaying();

@@ -13,6 +13,8 @@ import { Link, useParams, useRoutes, useLocation } from "react-router-dom";
 import { useUser } from "../../contexts/AuthContext";
 import { formatName } from "../../utils/format";
 import HeaderProfile from "../shared/HeaderProfile";
+import Loading from "../../icons/Loading";
+import CircleButton from "../shared/CircleButton";
 
 const Header = ({
   active,
@@ -39,12 +41,16 @@ const Header = ({
        transition-duration-400 flex items-center px-8 justify-between fixed z-20`}
     >
       <div className="flex gap-4">
-        <button className="w-9 h-9 rounded-full bg-spotify-100 flex justify-center items-center">
-          <MdNavigateNext className="w-9 h-9 rotate-180  text-white" />
-        </button>
-        <button className="w-9 h-9 rounded-full bg-spotify-100 flex justify-center items-center">
-          <MdNavigateNext className="w-9 h-9 text-white" />
-        </button>
+        <CircleButton
+          className="w-9 h-9 rounded-full bg-spotify-100 flex justify-center items-center"
+          LeftIcon={MdNavigateNext}
+          iconClassName="w-9 h-9 rotate-180 text-white"
+        />
+        <CircleButton
+          className="w-9 h-9 rounded-full bg-spotify-100 flex justify-center items-center"
+          LeftIcon={MdNavigateNext}
+          iconClassName={"w-9 h-9 text-white"}
+        />
         {isSearch && (
           <div className="w-[23rem] h-10 rounded-3xl bg-white flex items-center justify-between">
             <FiSearch className="w-6 h-6 ml-3" />

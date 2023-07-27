@@ -3,6 +3,7 @@ import { useUser } from "../../contexts/AuthContext";
 import supabase from "../../lib/supabase";
 import { formatName } from "../../utils/format";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
+import Button from "./Button";
 
 const HeaderProfile = () => {
   const [toggle, setToggle] = useState(false);
@@ -22,20 +23,21 @@ const HeaderProfile = () => {
 
   return (
     <div className="absolute left-[900px] " onClick={handleToggle}>
-      <button className="w-28 h-9 rounded-full bg-spotify-200 flex justify-around items-center">
-        <img
-          className="w-8 h-8 rounded-full bg-spotify-300 flex justify-center items-center"
-          src={user.avatar_url}
-        />
-        <span className="text-white text-sm font-bold">
-          {formatName(user.username)}
-        </span>
-        {toggle ? (
-          <IoMdArrowDropup className="text-white text-[24px]" />
-        ) : (
-          <IoMdArrowDropdown className="text-white text-[24px]" />
-        )}
-      </button>
+      <Button
+        className="w-28 h-9 rounded-full bg-spotify-200 flex justify-around items-center "
+        RightIcon={toggle ? IoMdArrowDropup : IoMdArrowDropdown}
+        iconClassName="text-white text-[24px]"
+      >
+        <div className="flex items-center gap-2">
+          <img
+            className="w-8 h-8 rounded-full bg-spotify-300 flex justify-center items-center"
+            src={user.avatar_url}
+          />
+          <span className="text-white text-sm font-bold">
+            {formatName(user.username)}
+          </span>
+        </div>
+      </Button>
       {toggle && (
         <div className="w-48 h-20 top-[50px] absolute right-0 bg-spotify-500 z-50 cursor-pointer">
           <div className="p-1 flex flex-col">

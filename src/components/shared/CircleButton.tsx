@@ -1,17 +1,21 @@
 import React, { ReactElement, ReactNode } from "react";
 import classNames from "classnames";
+import BaseButton, { BaseButtonProps } from "./BaseButton";
 
-interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {}
+interface CircleButtonProps extends BaseButtonProps {}
 
-const CircleButton = ({ ...props }: ButtonProps) => {
+const CircleButton: React.FC<CircleButtonProps> = ({ ...props }) => {
   const { children, className, ...rest } = props;
   return (
-    <button
-      className={classNames(`p-2 rounded-full flex justify-center items-center cursor-pointer`, className)}
+    <BaseButton
+      className={classNames(
+        `p-2 rounded-full flex justify-center items-center`,
+        className
+      )}
       {...rest}
     >
       {children}
-    </button>
+    </BaseButton>
   );
 };
 

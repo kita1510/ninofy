@@ -1,17 +1,18 @@
 import React from "react";
 import classNames from "classnames";
+import BaseButton, { BaseButtonProps } from "./BaseButton";
 
-interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {}
+interface ButtonProps extends BaseButtonProps {}
 
-const Button = ({ ...props }: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({ ...props }) => {
   const { children, className, ...rest } = props;
   return (
-    <button
-      className={classNames(`h-12 w-12 cursor-pointer`, className)}
+    <BaseButton
+      className={classNames(`h-12 w-12`, className)}
       {...rest}
     >
       {children}
-    </button>
+    </BaseButton>
   );
 };
 

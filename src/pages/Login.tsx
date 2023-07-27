@@ -23,16 +23,18 @@ const Login = () => {
         <Button
           className="bg-green-600 w-[17rem] rounded-sm text-white flex justify-center items-center gap-4 hover:bg-green-800"
           onClick={handleSignIn("github")}
+          LeftIcon={SiSpotify}
+          iconClassName="text-2xl"
         >
-          <SiSpotify className="text-2xl " />
-          <span>Login with Spotify</span>
+          Login with Spotify
         </Button>
         <Button
           className="bg-red-700 w-[17rem] rounded-sm text-white flex justify-center items-center gap-4 hover:bg-red-900"
           onClick={handleSignIn("google")}
+          LeftIcon={FcGoogle}
+          iconClassName="text-2xl"
         >
-          <FcGoogle className="text-2xl"></FcGoogle>
-          <span>Login with Google </span>
+          Login with Google
         </Button>
       </div>
     </div>

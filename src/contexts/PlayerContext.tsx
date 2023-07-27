@@ -40,7 +40,6 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
     };
     audioRef.current.ontimeupdate = () => {
       setCurrentTime(audioRef.current.currentTime);
-      // console.log(currentTime);
     };
     setCurrentSong(audioRef);
   }
