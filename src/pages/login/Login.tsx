@@ -1,10 +1,10 @@
-import supabase from "../lib/supabase";
+import supabase from "../../lib/supabase";
 import { FcGoogle } from "react-icons/fc";
 import { SiDiscord, SiSpotify } from "react-icons/si";
 import { BsGithub } from "react-icons/bs";
 import { Provider } from "@supabase/gotrue-js";
-import Button from "../components/shared/Button";
-import Image from "../components/shared/Image";
+import Button from "../../components/shared/Button";
+import Image from "../../components/shared/Image";
 
 const Login = () => {
   const handleSignIn = (provider: Provider) => async () => {

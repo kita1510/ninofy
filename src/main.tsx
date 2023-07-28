@@ -12,15 +12,25 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import PlayerProvider from "./contexts/PlayerContext";
 import { CookiesProvider } from "react-cookie";
 import { Suspense } from "react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-const client = new QueryClient();
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   // <React.StrictMode>
   <ThemeProvider>
     <QueryClientProvider client={client}>
-      <CookiesProvider>
-        <SpotifyProvider>
+      {/* <ReactQueryDevtools /> */}
+      <SpotifyProvider>
+        <CookiesProvider>
           <PlayerProvider>
             <AuthProvider>
               <BrowserRouter>
@@ -30,8 +40,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
               </BrowserRouter>
             </AuthProvider>
           </PlayerProvider>
-        </SpotifyProvider>
-      </CookiesProvider>
+        </CookiesProvider>
+      </SpotifyProvider>
     </QueryClientProvider>
   </ThemeProvider>
   // </React.StrictMode>

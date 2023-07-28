@@ -13,15 +13,12 @@ import CircleButton from "../shared/CircleButton";
 import clsx from "clsx";
 import TransLink from "../shared/TransLink";
 
-const Header = ({
-  active,
-  isSearch,
-}: {
-  active: boolean;
-  isSearch: boolean;
-}) => {
-  const [isScrool, setIsScrool] = useState(false);
+const Header = ({ active }: { active: boolean }) => {
   const user = useUser();
+  const [isScrool, setIsScrool] = useState(false);
+  const searchParams = new URL(location.href);
+
+  const isSearch = searchParams.pathname.includes("search");
 
   window.onscroll = () => {
     setIsScrool(window.scrollY === 0 ? false : true);

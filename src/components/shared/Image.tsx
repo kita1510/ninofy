@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { motion, MotionProps } from "framer-motion";
 import { useImage, ImgProps, Img } from "react-image";
 
+// https://prototypr.io/post/using-framer-motion-to-create-smooth-lazy-load-image-effects
+
 export interface ImageProps extends React.HTMLAttributes<HTMLDivElement> {
   src: string;
   alt?: string;

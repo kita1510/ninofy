@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import React, { forwardRef } from "react";
+import Loading from "../../icons/Loading";
 
 export interface BaseButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "onClick"> {
@@ -24,6 +25,7 @@ const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
       iconClassName,
       onClick,
       disabled,
+      isLoading,
       ...rest
     } = props;
     return (
@@ -34,7 +36,11 @@ const BaseButton = forwardRef<HTMLButtonElement, BaseButtonProps>(
           onClick?.(e);
         }}
       >
-        {LeftIcon && <LeftIcon className={iconClassName!} />}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          LeftIcon && <LeftIcon className={iconClassName!} />
+        )}
         {
           <button ref={ref} type="button" {...rest}>
             {children}

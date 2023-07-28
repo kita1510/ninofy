@@ -15,8 +15,6 @@ const ListSong = () => {
   const navigate = useNavigate();
   const [isMouseHover, setIsMouseHover] = useState(false);
 
-  const iconClass = !isPlaying ? ImPlay3 : GiPauseButton;
-
   // useEffect(() => {
   //   if (isPlaying) {
   //     setIsMouseHover(true);
@@ -80,7 +78,7 @@ const ListSong = () => {
               )}
               // onMouseEnter={handleMouseHover(true)}
               onClick={setTrackToPlay(t)}
-              LeftIcon={iconClass}
+              LeftIcon={!isPlaying ? ImPlay3 : GiPauseButton}
               iconClassName="text-black text-2xl absolute m-auto top-0 right-0 bottom-0 left-0"
             />
           </div>

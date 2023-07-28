@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
 import config from "../config";
 
-export const SpotifyContext = createContext<string>(null!);
+export const SpotifyContext = createContext<string>("");
 
 const SpotifyProvider = ({ children }: { children: ReactNode }) => {
   const clientId = config.spotifyId;
@@ -27,8 +27,10 @@ const SpotifyProvider = ({ children }: { children: ReactNode }) => {
       .then((res) => setAccessToken(res?.access_token));
   }, []);
 
+  console.log(accessToken);
+
   return (
-    <SpotifyContext.Provider value={accessToken}>
+    <SpotifyContext.Provider value={accessToken || ""}>
       {children}
     </SpotifyContext.Provider>
   );
@@ -36,6 +38,6 @@ const SpotifyProvider = ({ children }: { children: ReactNode }) => {
 
 export default SpotifyProvider;
 
-export const useAccessToken = () => {
+export const useSpotify = () => {
   return React.useContext(SpotifyContext);
 };
