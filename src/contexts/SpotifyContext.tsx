@@ -1,29 +1,32 @@
 import React, { createContext, ReactNode, useEffect, useState } from "react";
+import config from "../config";
 
-export const SpotifyContext = createContext<any>(null!);
+export const SpotifyContext = createContext<string>(null!);
 
 const SpotifyProvider = ({ children }: { children: ReactNode }) => {
-  const clientId = import.meta.env.VITE_SPOTIFY_ID;
-  const clientSecret = import.meta.env.VITE_SPOTIFY_SECRET;
+  const clientId = config.spotifyId;
+  const clientSecret = config.spotifySecret;
   const [accessToken, setAccessToken] = useState("");
+  const url = "https://accounts.spotify.com/api/token";
+
+  const authParameter = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body:
+      "grant_type=client_credentials&client_id=" +
+      clientId +
+      "&client_secret=" +
+      clientSecret,
+  };
 
   useEffect(() => {
-    var authParameter = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body:
-        "grant_type=client_credentials&client_id=" +
-        clientId +
-        "&client_secret=" +
-        clientSecret,
-    };
-
-    fetch("https://accounts.spotify.com/api/token", authParameter)
+    fetch(url, authParameter)
       .then((res) => res.json())
       .then((res) => setAccessToken(res?.access_token));
   }, []);
+
   return (
     <SpotifyContext.Provider value={accessToken}>
       {children}

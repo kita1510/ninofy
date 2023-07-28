@@ -2,7 +2,7 @@
 
 import React from "react";
 import Loading from "../icons/Loading";
-import ListSong from "./ListSong";
+import ListSong from "./playlists/ListSong";
 
 const Container = () => {
   return (

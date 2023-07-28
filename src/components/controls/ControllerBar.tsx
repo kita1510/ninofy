@@ -34,6 +34,9 @@ const ControllerBar = () => {
 
   // songDuration = audioRef.current?.duration;
   console.log(volume);
+
+
+  // const 
   return (
     <div className="w-full h-20 flex items-center mx-4 justify-between">
       <div className="flex items-center gap-4 w-[30%]">

@@ -3,11 +3,11 @@ import React, { useEffect, useMemo, useState } from "react";
 import { GiPauseButton } from "react-icons/gi";
 import { ImPlay3 } from "react-icons/im";
 import { Link, useNavigate } from "react-router-dom";
-import { usePlayer } from "../contexts/PlayerContext";
-import { Track } from "../types";
-import { songLists } from "../utils/dummyData";
-import CircleButton from "./shared/CircleButton";
-import MusicCard from "./shared/MusicCard";
+import { usePlayer } from "../../contexts/PlayerContext";
+import { Track } from "../../types";
+import { songLists } from "../../utils/dummyData";
+import CircleButton from "../shared/CircleButton";
+import MusicCard from "../shared/MusicCard";
 
 const ListSong = () => {
   const { isPlaying, setSong, handlePlaying, handlePausing } = usePlayer();
