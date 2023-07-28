@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <React.Fragment>
       <Layout>
-        <Container></Container>
+        <Container />
       </Layout>
     </React.Fragment>
   );

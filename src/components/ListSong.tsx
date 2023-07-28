@@ -17,13 +17,13 @@ const ListSong = () => {
 
   const iconClass = !isPlaying ? ImPlay3 : GiPauseButton;
 
-  useEffect(() => {
-    if (isPlaying) {
-      setIsMouseHover(true);
-    } else {
-      setIsMouseHover(false);
-    }
-  }, [isPlaying]);
+  // useEffect(() => {
+  //   if (isPlaying) {
+  //     setIsMouseHover(true);
+  //   } else {
+  //     setIsMouseHover(false);
+  //   }
+  // }, [isPlaying]);
 
   console.log(isMouseHover);
 
@@ -37,14 +37,14 @@ const ListSong = () => {
   const setTrackToPlay = (track: Track) => async () => {
     if (!isPlaying) {
       await setSong(track);
-      handlePlaying();
+      await handlePlaying();
     } else {
-      handlePausing();
+      await handlePausing();
     }
   };
 
-  const handleClick = (t: Track) => {
-    navigate(`/music/${t.id}`);
+  const handleClick = (track: Track) => {
+    navigate(`/music/${track.id}`);
   };
 
   return (

@@ -2,6 +2,7 @@
 
 import { Card, CardProps, Avatar, Typography } from "@material-tailwind/react";
 import { Track } from "../../types";
+import Image from "./Image";
 
 interface MusicCardProps extends Omit<CardProps, "children"> {
   track: Track;
@@ -14,7 +15,7 @@ const MusicCard: React.FC<MusicCardProps> = ({ track, children, ...props }) => {
       className="h-64 w-44 relative bg-spotify-200 flex flex-col p-4 gap-1 cursor-pointer rounded-md transition-duration-300 hover:bg-spotify-500 card"
       {...props}
     >
-      <Avatar className="w-36 h-36 " src={track.images} />
+      <Image className="w-36 h-36 " src={track.images} alt={track.title} />
       <div className="text-white font-bold text-[1rem] mt-3 text-2xl">
         {track.title}
       </div>

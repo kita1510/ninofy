@@ -4,6 +4,7 @@ import { SiDiscord, SiSpotify } from "react-icons/si";
 import { BsGithub } from "react-icons/bs";
 import { Provider } from "@supabase/gotrue-js";
 import Button from "../components/shared/Button";
+import Image from "../components/shared/Image";
 
 const Login = () => {
   const handleSignIn = (provider: Provider) => async () => {
@@ -13,7 +14,7 @@ const Login = () => {
   return (
     <div className="w-full h-[768px] bg-black font-semibold flex relative">
       <div className="w-3/5 h-full">
-        <img
+        <Image
           className="w-full h-full object-cover"
           src={"https://images8.alphacoders.com/131/1318148.png"}
           alt=""
