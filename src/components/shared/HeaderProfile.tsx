@@ -4,6 +4,7 @@ import supabase from "../../lib/supabase";
 import { formatName } from "../../utils/format";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import Button from "./Button";
+import Avatar from "./Avatar";
 
 const HeaderProfile = () => {
   const [toggle, setToggle] = useState(false);
@@ -31,7 +32,7 @@ const HeaderProfile = () => {
         iconClassName="text-white text-[24px]"
       >
         <div className="flex items-center gap-2">
-          <img
+          <Avatar
             className="w-8 h-8 rounded-full bg-spotify-300 flex justify-center items-center"
             src={user.avatar_url}
           />

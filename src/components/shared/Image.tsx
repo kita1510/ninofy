@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { motion, MotionProps } from "framer-motion";
 import { useImage, ImgProps, Img } from "react-image";
 
-interface ImageProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ImageProps extends React.HTMLAttributes<HTMLDivElement> {
   src: string;
   alt?: string;
 }
