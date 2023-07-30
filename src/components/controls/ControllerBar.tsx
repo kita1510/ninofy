@@ -15,7 +15,7 @@ import CircleButton from "../shared/CircleButton";
 const ControllerBar = () => {
   const {
     isPlaying,
-    handlePlaying,
+    playSong,
     handlePausing,
     song,
     currentTime,
@@ -35,8 +35,7 @@ const ControllerBar = () => {
   // songDuration = audioRef.current?.duration;
   // console.log(volume);
 
-
-  // const 
+  // const
   return (
     <div className="w-full h-20 flex items-center mx-4 justify-between">
       <div className="flex items-center gap-4 w-[30%]">
@@ -75,7 +74,7 @@ const ControllerBar = () => {
             <CircleButton
               className="p-2"
               LeftIcon={BsPlayCircleFill}
-              onClick={handlePlaying}
+              onClick={playSong}
               iconClassName="hover:opacity-100 text-white w-12 h-12"
             />
           ) : (
@@ -103,7 +102,7 @@ const ControllerBar = () => {
             {numberToMinute(currentTime)}
           </div>
           <RangeInput
-            value={(currentTime / songDuration) * PERCENT}
+            value={(currentTime / songDuration) * PERCENT || 0}
             onChange={(e) => handleSeekTime(e)}
             className={"h-1 w-96"}
             min={0}
@@ -146,7 +145,7 @@ const ControllerBar = () => {
             />
           )}
           <RangeInput
-            value={volume}
+            value={volume || 0}
             onChange={(e) => handleSeekVolume(e)}
             className={"h-1 w-28"}
             min={0}

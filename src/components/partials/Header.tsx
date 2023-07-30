@@ -8,7 +8,6 @@ import Button from "../shared/Button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/AuthContext";
 import HeaderProfile from "../shared/HeaderProfile";
-import Loading from "../../icons/Loading";
 import CircleButton from "../shared/CircleButton";
 import clsx from "clsx";
 import TransLink from "../shared/TransLink";
@@ -16,13 +15,11 @@ import TransLink from "../shared/TransLink";
 const Header = ({ active }: { active: boolean }) => {
   const user = useUser();
   const [isScrool, setIsScrool] = useState(false);
-  const navigate = useNavigate()
-  const location = useLocation()
   const searchParams = new URL(window.location.href);
+  const navigate = useNavigate();
 
   const isSearch = searchParams.pathname.includes("search");
 
-  console.log(location)
   window.onscroll = () => {
     setIsScrool(window.scrollY === 0 ? false : true);
   };

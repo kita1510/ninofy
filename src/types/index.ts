@@ -7,7 +7,7 @@ export interface SongProps {
   isMuted: boolean;
   song: Track ;
   setSong: React.Dispatch<React.SetStateAction<Track>>;
-  handlePlaying: () => void;
+  playSong: () => void;
   handlePausing: () => void;
   songDuration: number;
   currentTime: number;

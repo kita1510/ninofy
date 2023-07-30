@@ -1,22 +1,43 @@
 //https://github.com/alehuo/spotti/blob/master/src/services
 
-export interface Image {
+type Image = {
   height: number | null;
   width: number | null;
   url: string;
-}
+};
 export interface Playlist {
   collaborative: boolean;
   description: string;
   id: string;
   images: Image[];
-  name: string;
+  name?: string;
   primary_color: null | string;
   public: boolean;
-  tracks: {
-    href: string;
-    total: number;
-  };
+  tracks: Tracks;
+  follower: PlaylistFollowers;
 }
 
+type PlaylistFollowers = {
+  total: number;
+  href: string;
+};
 
+export interface Tracks {
+  href: string;
+  items: TrackItem[];
+  limit: number;
+  offset: number;
+}
+
+export interface TrackItem {
+  addedAt: string;
+  addedBy: Omit<Owner, "displayName">;
+  isLocal: boolean;
+  primary_color: string;
+}
+
+export interface Owner {
+  id: string;
+  displayName: string;
+  type: "user" | "";
+}

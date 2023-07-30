@@ -33,7 +33,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
 
   //   console.log(audioRef);
 
-  const handlePlaying = () => {
+  const playSong = () => {
     audioRef.current?.play();
     audioRef.current.onplay = () => {
       setIsPlaying(true);
@@ -89,7 +89,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
         song,
         isPlaying,
         currentTime,
-        handlePlaying,
+        playSong,
         songDuration,
         // step,
         handlePausing,

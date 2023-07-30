@@ -10,7 +10,7 @@ import Layout from "../../components/layouts/Layout";
 const CardDetail = () => {
   // const song = useLocation();
   const {
-    handlePlaying,
+    playSong,
     handlePausing,
     isPlaying,
     setSong,
@@ -20,7 +20,7 @@ const CardDetail = () => {
 
   // async function playSong() {
   //   await setSong(song.state.song);
-  //   await handlePlaying();
+  //   await playSong();
   // }
 
   console.log(s);

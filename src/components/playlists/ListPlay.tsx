@@ -13,7 +13,7 @@ import CircleButton from "../shared/CircleButton";
 import MusicCard from "../shared/MusicCard";
 
 const ListSong = () => {
-  const { isPlaying, setSong, handlePlaying, handlePausing } = usePlayer();
+  const { isPlaying, setSong, playSong, handlePausing } = usePlayer();
   // console.log(artists);
   const navigate = useNavigate();
   const [isMouseHover, setIsMouseHover] = useState(false);
@@ -45,7 +45,7 @@ const ListSong = () => {
   const setTrackToPlay = (track: Track) => async () => {
     if (!isPlaying) {
       await setSong(track);
-      await handlePlaying();
+      await playSong();
     } else {
       await handlePausing();
     }
