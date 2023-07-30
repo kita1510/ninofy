@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  background-color:#181818 ;
+}
+
 .linear-gradient-400 {
   background-image: linear-gradient(to bottom, #181818, #242424);
 }

@@ -5,7 +5,7 @@ import { GrNext, GrPrevious, GrFormNext, GrClose } from "react-icons/gr";
 import { MdNavigateNext } from "react-icons/md";
 import { FiSearch } from "react-icons/fi";
 import Button from "../shared/Button";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/AuthContext";
 import HeaderProfile from "../shared/HeaderProfile";
 import Loading from "../../icons/Loading";
@@ -16,10 +16,13 @@ import TransLink from "../shared/TransLink";
 const Header = ({ active }: { active: boolean }) => {
   const user = useUser();
   const [isScrool, setIsScrool] = useState(false);
-  const searchParams = new URL(location.href);
+  const navigate = useNavigate()
+  const location = useLocation()
+  const searchParams = new URL(window.location.href);
 
   const isSearch = searchParams.pathname.includes("search");
 
+  console.log(location)
   window.onscroll = () => {
     setIsScrool(window.scrollY === 0 ? false : true);
   };
@@ -37,11 +40,13 @@ const Header = ({ active }: { active: boolean }) => {
           className="w-9 h-9 rounded-full bg-spotify-100 flex justify-center items-center"
           LeftIcon={MdNavigateNext}
           iconClassName="w-9 h-9 rotate-180 text-white"
+          onClick={() => navigate(-1)}
         />
         <CircleButton
           className="w-9 h-9 rounded-full bg-spotify-100 flex justify-center items-center"
           LeftIcon={MdNavigateNext}
           iconClassName={"w-9 h-9 text-white"}
+          onClick={() => navigate(1)}
         />
         {isSearch && (
           <div className="w-[23rem] h-10 rounded-3xl bg-white flex items-center justify-between">

@@ -49,7 +49,7 @@ const getAlbum = () => {};
 const getPlaylist = async () => {
   const playlistId = "5WMHtxQfNI682Uh3OfsJiT";
   const playlist = await client.get(`/playlists/${playlistId}`);
-  return playlist.data;
+  return playlist;
 };
 
 export { getAlbum, getPlaylist };

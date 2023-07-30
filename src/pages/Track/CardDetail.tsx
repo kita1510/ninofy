@@ -8,7 +8,7 @@ import CircleButton from "../../components/shared/CircleButton";
 import Layout from "../../components/layouts/Layout";
 
 const CardDetail = () => {
-  const song = useLocation();
+  // const song = useLocation();
   const {
     handlePlaying,
     handlePausing,
@@ -18,10 +18,10 @@ const CardDetail = () => {
     audioRef,
   } = usePlayer();
 
-  async function playSong() {
-    await setSong(song.state.song);
-    await handlePlaying();
-  }
+  // async function playSong() {
+  //   await setSong(song.state.song);
+  //   await handlePlaying();
+  // }
 
   console.log(s);
 
@@ -35,7 +35,7 @@ const CardDetail = () => {
         <div className="h-full">
           <img
             className="w-52 h-52 rounded-full absolute bottom-14 left-14 object-cover object-center"
-            src={song.state.song.images}
+            // src={song.state.song.images}
             alt=""
           />
         </div>
@@ -44,10 +44,10 @@ const CardDetail = () => {
             Song
           </div>
           <div className="absolute bottom-32 left-10 font-bold text-[50px] text-white ">
-            {song.state.song.title}
+            {/* {song.state.song.title} */}
           </div>
           <div className="absolute bottom-10 left-5 font-semibold text-1xl text-white ">
-            {song.state.song.singer}
+            {/* {song.state.song.singer} */}
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@ const CardDetail = () => {
         {!isPlaying ? (
           <CircleButton
             className="w-[56px] h-[56px] bg-green-400 absolute hover:bg-green-300"
-            onClick={playSong}
+            // onClick={playSong}
           >
             <GrPlayFill className={``} size={20} />
           </CircleButton>

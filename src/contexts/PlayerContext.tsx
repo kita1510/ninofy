@@ -33,7 +33,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
 
   //   console.log(audioRef);
 
-  function handlePlaying() {
+  const handlePlaying = () => {
     audioRef.current?.play();
     audioRef.current.onplay = () => {
       setIsPlaying(true);
@@ -42,43 +42,43 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
       setCurrentTime(audioRef.current.currentTime);
     };
     setCurrentSong(audioRef);
-  }
+  };
 
   // const step = audioRef.current?.duration / 60 / 100;
   // console.log(1 / step);
   // console.log(currentTime );
 
-  function handlePausing() {
+  const handlePausing = () => {
     audioRef.current?.pause();
     audioRef.current.onpause = () => {
       setIsPlaying(false);
     };
-  }
+  };
 
-  function handleSeekTime(e: any) {
+  const handleSeekTime = (e: any) => {
     audioRef.current.currentTime = (songDuration / PERCENT) * e.target.value;
-  }
+  };
 
-  function mutedVolume() {
+  const mutedVolume = () => {
     setIsMuted(true);
     setVolume(0);
-  }
+  };
 
-  function unMutedVolume() {
+  const unMutedVolume = () => {
     setIsMuted(false);
     setVolume(0.5);
-  }
+  };
 
-  function handleSeekVolume(e: any) {
+  const handleSeekVolume = (e: any) => {
     audioRef.current.volume = e.target.value;
     setVolume(e.target.value);
     audioRef.current.onvolumechange = () => {};
-  }
+  };
 
-  function handleLoop() {
+  const handleLoop = () => {
     setIsLoop(!isLoop);
     audioRef.current.loop = true;
-  }
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });

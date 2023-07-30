@@ -46,6 +46,6 @@ export const songLists: Track[] = [
       "https://i.pinimg.com/564x/7f/c6/b8/7fc6b8a4291b7acd7d959ec0dcce16f6.jpg",
     title: "アイン",
     singer: "Yui Yuigahama",
-    audio: chimuonbenem,
+    audio: "https://p.scdn.co/mp3-preview/83bac988441bd8d4dc94421d12fb62efc6534f8f?cid=5bbfc9b0510d4a2dbc99c5d0e20d26ba",
   },
 ];

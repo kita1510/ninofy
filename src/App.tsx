@@ -6,8 +6,15 @@ import Login from "./pages/login/Login";
 import SearchPage from "./pages/search/SearchPage";
 import ControllerBar from "./components/controls/ControllerBar";
 import { ToastContainer } from "react-toastify";
+import PlaylistDetail from "./pages/playlist/PlaylistDetail";
 
 function App() {
+  const location = new URL(window.location.href);
+
+  const isLoginPage = location.pathname.includes("/login");
+
+  console.log(isLoginPage);
+
   return (
     <div className="w-full h-[768px] bg-spotify-300">
       <ToastContainer
@@ -27,10 +34,13 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/music/:id" element={<CardDetail />}></Route>
         <Route path="/login" element={<Login />} />
+        <Route path="/playlist/" element={<PlaylistDetail />} />
       </Routes>
-      <div className="w-full h-[90px] fixed bottom-0 z-[999] bg-spotify-200 border-t-[1px] border-slate-700 ">
-        <ControllerBar />
-      </div>
+      {!isLoginPage && (
+        <div className="w-full h-[90px] fixed bottom-0 z-[999] bg-spotify-200 border-t-[1px] border-slate-700 ">
+          <ControllerBar />
+        </div>
+      )}
     </div>
   );
 }

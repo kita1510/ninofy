@@ -33,7 +33,7 @@ const ControllerBar = () => {
   // const audioRef = useRef();
 
   // songDuration = audioRef.current?.duration;
-  console.log(volume);
+  // console.log(volume);
 
 
   // const 
