@@ -11,7 +11,7 @@ export interface Playlist {
   id: string;
   images: Image[];
   name?: string;
-  primary_color: null | string;
+  primaryColor: null | string;
   public: boolean;
   tracks: Tracks;
   follower: PlaylistFollowers;
@@ -33,11 +33,11 @@ export interface TrackItem {
   addedAt: string;
   addedBy: Omit<Owner, "displayName">;
   isLocal: boolean;
-  primary_color: string;
+  primaryColor: string;
 }
 
 export interface Owner {
   id: string;
   displayName: string;
-  type: "user" | "";
+  type: "user" | "admin";
 }

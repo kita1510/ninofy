@@ -34,18 +34,26 @@ const PlaylistDetail = () => {
     <Layout>
       <div className="flex flex-col">
         <PlaylistBanner playlist={playlist} />
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 w-full h-28 mx-5 justify-center ">
           <CircleButton
             className={clsx(
               `
-            bg-green-500 z-[8] absolute right-5 top-32 w-10 h-10`
+            bg-green-500`
             )}
             // onMouseEnter={handleMouseHover(true)}
             // onClick={setTrackToPlay(t)}
             LeftIcon={!isPlaying ? ImPlay3 : GiPauseButton}
-            iconClassName="text-black text-2xl absolute m-auto top-0 right-0 bottom-0 left-0"
+            iconClassName="text-black text-2xl m-auto"
           />
         </div>
+        <div className="w-full h-9 bg-white grid grid-cols-12 px-10">
+          <div className="col-span-1">#</div>
+          <div className="col-span-4">Title</div>
+          <div className="col-span-3">Albums</div>
+          <div className="col-span-2">Date added</div>
+          <div className="col-span-2"></div>
+        </div>
+        <div className="w-full min-h-[300px] bg-black"></div>
       </div>
     </Layout>
   );
