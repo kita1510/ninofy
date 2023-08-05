@@ -56,16 +56,16 @@ const CardDetail = () => {
           <CircleButton
             className="w-[56px] h-[56px] bg-green-400 absolute hover:bg-green-300"
             // onClick={playSong}
-          >
-            <GrPlayFill className={``} size={20} />
-          </CircleButton>
+            LeftIcon={GrPlayFill}
+            iconClassName="w-20"
+          />
         ) : (
           <CircleButton
             className="w-[56px] h-[56px] rounded-full bg-green-400 absolute flex justify-center items-center"
             onClick={handlePausing}
-          >
-            <BsFillPauseFill className={``} size={24} />
-          </CircleButton>
+            LeftIcon={BsFillPauseFill}
+            iconClassName="w-24"
+          />
         )}
         <AiOutlineHeart
           className="absolute left-36 top-12"

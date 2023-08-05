@@ -9,7 +9,6 @@ import Image from "../../components/shared/Image";
 const Login = () => {
   const handleSignIn = (provider: Provider) => async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({ provider });
-    console.log(error);
   };
   return (
     <div className="w-full h-[768px] bg-black font-semibold flex relative">
