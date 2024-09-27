@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
 import config from "../config";
-import { useSpotify } from "../contexts/SpotifyContext";
 
 const clientId = config.spotifyId;
 const clientSecret = config.spotifySecret;

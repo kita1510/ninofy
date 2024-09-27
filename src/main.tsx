@@ -7,7 +7,6 @@ import { ThemeProvider } from "@material-tailwind/react";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "./contexts/AuthContext";
-import SpotifyProvider from "./contexts/SpotifyContext";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import PlayerProvider from "./contexts/PlayerContext";
 import { CookiesProvider } from "react-cookie";
@@ -29,7 +28,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <ThemeProvider>
     <QueryClientProvider client={client}>
       {/* <ReactQueryDevtools /> */}
-      <SpotifyProvider>
         <CookiesProvider>
           <PlayerProvider>
             <AuthProvider>
@@ -41,7 +39,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             </AuthProvider>
           </PlayerProvider>
         </CookiesProvider>
-      </SpotifyProvider>
     </QueryClientProvider>
   </ThemeProvider>
   // </React.StrictMode>

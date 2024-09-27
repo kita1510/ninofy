@@ -8,13 +8,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { usePlayer } from "../../contexts/PlayerContext";
 import { Track } from "../../types";
 import { songLists } from "../../utils/dummyData";
-import Layout from "../layouts/Layout";
 import CircleButton from "../shared/CircleButton";
 import MusicCard from "../shared/MusicCard";
 
 const TrackList = () => {
-  const { isPlaying, song, setSong, playSong, handlePausing } =
-    usePlayer();
+  const { isPlaying, song, setSong, playSong, handlePausing } = usePlayer();
   // console.log(artists);
   const navigate = useNavigate();
   const [isMouseHover, setIsMouseHover] = useState(false);
@@ -23,28 +21,10 @@ const TrackList = () => {
 
   // console.log(playing);
 
-  // useEffect(() => {
-  //   if (isPlaying) {
-  //     setIsMouseHover(true);
-  //   } else {
-  //     setIsMouseHover(false);
-  //   }
-  // }, [isPlaying]);
-
-  // console.log(isMouseHover);
-
-  const handleMouseHover = (boolean: boolean) => () => {
-    setIsMouseHover(boolean);
-  };
-
-  const memoizedHandleMouseOver = useMemo(() => handleMouseHover(true), []);
-  const memoizedHandleMouseLeave = useMemo(() => handleMouseHover(false), []);
-
   const setTrackToPlay = (track: Track) => async () => {
     if (!isPlaying) {
       await setSong(track);
       await playSong();
-      console.log();
     } else {
       await handlePausing();
     }
@@ -82,7 +62,7 @@ const TrackList = () => {
               />
               {/* </Link> */}
               <motion.div
-              className=""
+                className=""
                 onClick={setTrackToPlay(t)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -93,7 +73,6 @@ const TrackList = () => {
                   bg-green-500 z-[8] absolute right-5 top-32 w-10 h-10`,
                     isMouseHover ? "block" : "hidden"
                   )}
-                  onMouseEnter={handleMouseHover(true)}
                   LeftIcon={!isPlaying ? ImPlay3 : GiPauseButton}
                   iconClassName="text-black text-2xl absolute m-auto top-0 right-0 bottom-0 left-0"
                 />

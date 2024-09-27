@@ -32,9 +32,6 @@ const ListSong = () => {
     getPlaylist().then((res) => setPlaylist(res.data));
   }, []);
 
-  console.log(playlist);
-  console.log(isMouseHover);
-
   const handleMouseHover = (boolean: boolean) => () => {
     setIsMouseHover(boolean);
   };

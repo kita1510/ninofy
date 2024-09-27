@@ -14,21 +14,21 @@ import TransLink from "../shared/TransLink";
 
 const Header = ({ active }: { active: boolean }) => {
   const user = useUser();
-  const [isScrool, setIsScrool] = useState(false);
+  const [isScroll, setIsScroll] = useState(false);
   const searchParams = new URL(window.location.href);
   const navigate = useNavigate();
 
   const isSearch = searchParams.pathname.includes("search");
 
   window.onscroll = () => {
-    setIsScrool(window.scrollY === 0 ? false : true);
+    setIsScroll(window.scrollY === 0 ? false : true);
   };
 
   return (
     <div
       className={clsx(
         `w-full h-16`,
-        active && isScrool ? "bg-spotify-100" : "bg-transparent",
+        active && isScroll ? "bg-spotify-100" : "bg-transparent",
         "transition-duration-400 flex items-center px-8 justify-between fixed z-20"
       )}
     >
@@ -58,7 +58,7 @@ const Header = ({ active }: { active: boolean }) => {
         )}
       </div>
 
-      {user ? (
+      {/* {user ? (
         <HeaderProfile />
       ) : (
         <TransLink to="/login" className="absolute left-[900px]">
@@ -66,7 +66,13 @@ const Header = ({ active }: { active: boolean }) => {
             Login
           </Button>
         </TransLink>
-      )}
+      )} */}
+
+      <div className="absolute left-[900px]">
+        <Button className="w-28 h-9 rounded-lg bg-white  font-bold text-center leading-9 cursor-pointer">
+          Login
+        </Button>
+      </div>
     </div>
   );
 };

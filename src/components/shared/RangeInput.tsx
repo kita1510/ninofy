@@ -21,7 +21,7 @@ const RangeInput: React.FC<RangeInputProps> = ({
 }) => {
   return (
     <input
-      className={clsx(className, "cursor-pointer")}
+      className={clsx(className, "cursor-pointer input-range")}
       type="range"
       min={`${min}`}
       step={`${step}`}

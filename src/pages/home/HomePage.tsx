@@ -3,13 +3,11 @@ import Layout from "../../components/layouts/Layout";
 import TrackList from "../../components/playlists/TrackList";
 import TransLink from "../../components/shared/TransLink";
 import config from "../../config";
-import { useSpotify } from "../../contexts/SpotifyContext";
 import { getAlbum, getPlaylist } from "../../services/spotify";
 import { Playlist } from "../../types/spotify";
 
 const HomePage = () => {
   const albums = getAlbum();
-  const accessToken = useSpotify();
 
   return (
     <Layout>
