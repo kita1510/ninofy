@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { motion } from "framer-motion";
 import React, { useEffect, useMemo, useState } from "react";
 import { GiPauseButton } from "react-icons/gi";
 import { ImPlay3 } from "react-icons/im";
@@ -13,21 +12,41 @@ import MusicCard from "../shared/MusicCard";
 
 const TrackList = () => {
   const { isPlaying, song, setSong, playSong, handlePausing } = usePlayer();
-  // console.log(artists);
   const navigate = useNavigate();
-  const [isMouseHover, setIsMouseHover] = useState(false);
 
-  // const playing = songLists.some((t) => t.id === song.id);
+  const [hoveredTrackId, setHoveredTrackId] = useState<string | number | null>(
+    null
+  );
+  const [activeTrackId, setActiveTrackId] = useState<string | number | null>(
+    null
+  );
 
-  // console.log(playing);
+  useEffect(() => {
+    const storedActiveTrack = localStorage.getItem("activeTrackId");
+    if (storedActiveTrack) {
+      setActiveTrackId(storedActiveTrack);
+    }
+  }, []);
 
   const setTrackToPlay = (track: Track) => async () => {
-    if (!isPlaying) {
+    if (!song || song.id !== track.id) {
       await setSong(track);
       await playSong();
-    } else {
-      await handlePausing();
+      setActiveTrackId(track.id);
+      localStorage.setItem("activeTrackId", track.id + "");
+      return;
     }
+
+    if (isPlaying) {
+      await handlePausing();
+      setActiveTrackId(null);
+      localStorage.removeItem("activeTrackId");
+      return;
+    }
+
+    await playSong();
+    setActiveTrackId(track.id);
+    localStorage.setItem("activeTrackId", track.id + "");
   };
 
   const handleClick = (track: Track) => {
@@ -46,37 +65,34 @@ const TrackList = () => {
       </div>
       <div className="flex gap-6 ">
         {songLists.map((t) => {
-          // console.log(isPlaying);
+          // const isCurrentSong = song?.id === t.id;
+          const isHovered = hoveredTrackId === t.id;
+          const isActive = activeTrackId === t.id;
+
           return (
-            <div key={t.id} className="flex relative">
-              {/* <Link
-              style={{ pointerEvents: "visible" }}
-              to={{ pathname: `/music/${t.id}` }}
-              state={{ song: t, listSong: songLists }}
-            > */}
-              <MusicCard
-                onClick={() => handleClick(t)}
-                track={t}
-                onMouseEnter={() => setIsMouseHover(true)}
-                // onMouseLeave={() => setIsMouseHover(false)}
-              />
-              {/* </Link> */}
-              <motion.div
-                className=""
-                onClick={setTrackToPlay(t)}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <CircleButton
-                  className={clsx(
-                    `
-                  bg-green-500 z-[8] absolute right-5 top-32 w-10 h-10`,
-                    isMouseHover ? "block" : "hidden"
-                  )}
-                  LeftIcon={!isPlaying ? ImPlay3 : GiPauseButton}
-                  iconClassName="text-black text-2xl absolute m-auto top-0 right-0 bottom-0 left-0"
-                />
-              </motion.div>
+            <div
+              key={t.id}
+              className="flex relative"
+              onMouseEnter={() => setHoveredTrackId(t.id)}
+              onMouseLeave={() => setHoveredTrackId(null)}
+            >
+              <MusicCard onClick={() => handleClick(t)} track={t} />
+              {(isHovered || isActive) && (
+                <div className="" onClick={setTrackToPlay(t)}>
+                  <CircleButton
+                    className={clsx(
+                      `
+                  bg-green-500 z-[8] absolute right-5 top-32 w-10 h-10`
+                    )}
+                    LeftIcon={
+                      !isPlaying || activeTrackId !== t.id
+                        ? ImPlay3
+                        : GiPauseButton
+                    }
+                    iconClassName="text-black text-2xl absolute m-auto top-0 right-0 bottom-0 left-0"
+                  />
+                </div>
+              )}
             </div>
           );
         })}

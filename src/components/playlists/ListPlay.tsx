@@ -16,15 +16,6 @@ const ListSong = () => {
   const { isPlaying, setSong, playSong, handlePausing } = usePlayer();
   // console.log(artists);
   const navigate = useNavigate();
-  const [isMouseHover, setIsMouseHover] = useState(false);
-
-  // useEffect(() => {
-  //   if (isPlaying) {
-  //     setIsMouseHover(true);
-  //   } else {
-  //     setIsMouseHover(false);
-  //   }
-  // }, [isPlaying]);
 
   const [playlist, setPlaylist] = useState<Playlist>();
 
@@ -32,21 +23,7 @@ const ListSong = () => {
     getPlaylist().then((res) => setPlaylist(res.data));
   }, []);
 
-  const handleMouseHover = (boolean: boolean) => () => {
-    setIsMouseHover(boolean);
-  };
 
-  const memoizedHandleMouseOver = useMemo(() => handleMouseHover(true), []);
-  const memoizedHandleMouseLeave = useMemo(() => handleMouseHover(false), []);
-
-  const setTrackToPlay = (track: Track) => async () => {
-    if (!isPlaying) {
-      await setSong(track);
-      await playSong();
-    } else {
-      await handlePausing();
-    }
-  };
 
   const handleClick = (track: Track) => {
     navigate(`/music/${track.id}`);
@@ -65,26 +42,16 @@ const ListSong = () => {
       <div className="flex gap-6 ">
         {songLists.map((t) => (
           <div key={t.id} className="flex relative">
-            {/* <Link
-              style={{ pointerEvents: "visible" }}
-              to={{ pathname: `/music/${t.id}` }}
-              state={{ song: t, listSong: songLists }}
-            > */}
             <MusicCard
               onClick={() => handleClick(t)}
               track={t}
-              onMouseEnter={() => setIsMouseHover(true)}
-              // onMouseLeave={() => setIsMouseHover(false)}
             />
             {/* </Link> */}
             <CircleButton
               className={clsx(
                 `
                 bg-green-500 z-[8] absolute right-5 top-32 w-10 h-10`,
-                isMouseHover ? "block" : "hidden"
               )}
-              // onMouseEnter={handleMouseHover(true)}
-              onClick={setTrackToPlay(t)}
               LeftIcon={!isPlaying ? ImPlay3 : GiPauseButton}
               iconClassName="text-black text-2xl absolute m-auto top-0 right-0 bottom-0 left-0"
             />
