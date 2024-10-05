@@ -37,7 +37,7 @@ function App() {
         <Route path="/playlist/" element={<PlaylistDetail />} />
       </Routes>
       {!isLoginPage && (
-        <div className="w-full h-[90px] fixed bottom-0 z-[999] bg-spotify-200 border-t-[1px] border-slate-700 ">
+        <div className="w-full h-[90px] fixed bottom-0 z-[999] bg-spotify-100 ">
           <ControllerBar />
         </div>
       )}

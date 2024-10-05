@@ -37,7 +37,7 @@ const ControllerBar = () => {
 
   // const
   return (
-    <div className="w-full h-20 flex items-center mx-4 justify-between">
+    <div className="w-full h-20 flex mt-2 items-center mx-4 justify-between">
       <div className="flex items-center gap-4 w-[30%]">
         <img
           className="w-14 h-14 cursor-pointer object-cover object-center"
@@ -58,7 +58,7 @@ const ControllerBar = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-1 w-[50%]">
+      <div className="flex flex-col gap-0 mb-2 w-[50%]">
         <div className="flex items-center gap-4 justify-center">
           <TbArrowsShuffle
             className="opacity-80 hover:opacity-100"
@@ -104,7 +104,7 @@ const ControllerBar = () => {
           <RangeInput
             value={(currentTime / songDuration) * PERCENT || 0}
             onChange={(e) => handleSeekTime(e)}
-            className={"h-1 w-96"}
+            className={"h-1 w-[450px]"}
             min={0}
             max={100}
             step={1}
