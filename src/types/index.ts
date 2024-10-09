@@ -2,7 +2,7 @@ import { User } from "@supabase/supabase-js";
 import { ChangeEvent } from "react";
 
 export interface SongProps {
-  id: number;
+  // id: number;
   isPlaying: boolean;
   isMuted: boolean;
   song: Track ;
@@ -14,13 +14,14 @@ export interface SongProps {
   mutedVolume: () => void;
   unMutedVolume: () => void;
   audioRef: any;
-  progress: number;
+  // progress: number;
   volume: number;
+  currentSong?: React.MutableRefObject<HTMLMediaElement>;
   handleSeekTime: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSeekVolume: (e: ChangeEvent<HTMLInputElement>) => void;
   handleLoop: () => void;
   isLoop: boolean;
-  step: number;
+  step?: number;
 }
 
 export type AdditionalUser = User & {

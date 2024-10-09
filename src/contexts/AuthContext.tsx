@@ -16,7 +16,7 @@ const accessTokenCookieName = "sb-access-token";
 const refreshTokenCookieName = "sb-refresh-token";
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<AdditionalUser>(null!);
+  const [user, setUser] = useState<any>(null!);
   const [accessTokenCookies, setAccessTokenCookie, removeAccessTokenCookie] =
     useCookies([accessTokenCookieName]);
   const [refreshTokenCookies, setRefreshTokenCookie, removeRefreshTokenCookie] =

@@ -8,7 +8,6 @@ import CircleButton from "../../components/shared/CircleButton";
 import Layout from "../../components/layouts/Layout";
 
 const CardDetail = () => {
-  // const song = useLocation();
   const {
     playSong,
     handlePausing,
@@ -17,13 +16,6 @@ const CardDetail = () => {
     song: s,
     audioRef,
   } = usePlayer();
-
-  // async function playSong() {
-  //   await setSong(song.state.song);
-  //   await playSong();
-  // }
-
-  console.log(s);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });

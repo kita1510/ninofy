@@ -26,7 +26,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   const [volume, setVolume] = useState(0.5);
   const [currentSong, setCurrentSong] =
     useState<React.MutableRefObject<HTMLMediaElement>>();
-  const [song, setSong] = useState<State>();
+  const [song, setSong] = useState<any>();
   let songDuration = 0;
 
   songDuration = audioRef.current?.duration;
