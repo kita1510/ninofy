@@ -4,7 +4,7 @@ import Layout from "../../components/layouts/Layout";
 const SearchPage = () => {
   return (
     <React.Fragment>
-      <Layout></Layout>
+      <Layout>x</Layout>
     </React.Fragment>
   );
 };
