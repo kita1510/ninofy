@@ -28,6 +28,8 @@ const TrackList = () => {
     }
   }, []);
 
+  // console.log(activeTrackId);
+
   const setTrackToPlay = (track: Track) => async () => {
     if (!song || song.id !== track.id) {
       await setSong(track);

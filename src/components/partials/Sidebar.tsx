@@ -10,13 +10,15 @@ import { VscLibrary } from "react-icons/vsc";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { IconType } from "react-icons";
+import Image from "../shared/Image";
+
 import clsx from "clsx";
 
 interface RoutesProps {
   to: string;
   page?: string;
   icon?: ReactNode;
-  space?: boolean
+  space?: boolean;
 }
 
 const routes: RoutesProps[] = [
@@ -39,7 +41,7 @@ const routes: RoutesProps[] = [
     to: "/",
     page: "Create Playlist",
     icon: <SiAddthis className="w-6 h-6" />,
-    space: true
+    space: true,
   },
   {
     to: "/",
@@ -52,17 +54,23 @@ const Sidebar = () => {
   return (
     <div className="w-[290px] min-h-[800px] bg-spotify-100 px-6 py-6 flex flex-col gap-8 ">
       <div className="flex gap-1 items-center ">
-        <BsSpotify className="text-white w-10 h-10" />
+        {/* <BsSpotify className="text-white w-10 h-10" /> */}
         <Link to="/">
-          <span className="text-white text-[24px] font-bold cursor-pointer">
-            Ninofy{" "}
-          </span>
+          <Image
+            src="../../../public/ninoicon.jpg"
+            className="w-10 h-10 rounded-full"
+          />
         </Link>
       </div>
       <div className="text-spotify-400 flex flex-col gap-3">
-        {routes.map((route,index) => (
+        {routes.map((route, index) => (
           <Link to={route.to} key={index}>
-            <div className={clsx("flex items-center gap-4 cursor-pointer hover:text-white", route.space ? "mt-7" : "")}>
+            <div
+              className={clsx(
+                "flex items-center gap-4 cursor-pointer hover:text-white",
+                route.space ? "mt-7" : ""
+              )}
+            >
               {route.icon}
               <span className="text-xs font-bold">{route.page}</span>
             </div>

@@ -1,0 +1,15 @@
+.input-range::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none; 
+    width:16px;
+    height: 8px;
+    background-color: #04AA6D;
+    border-radius:100px;
+  }
+  
+  .input-range::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    cursor: pointer;
+  }

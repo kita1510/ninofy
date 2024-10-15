@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { GrPlayFill } from "react-icons/gr";
 import { AiOutlineEllipsis, AiOutlineHeart } from "react-icons/ai";
 import { BsFillPauseFill } from "react-icons/bs";

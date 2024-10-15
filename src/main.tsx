@@ -4,7 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { ThemeProvider } from "@material-tailwind/react";
-import "./index.css";
+import "./styles/index.css";
 import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "./contexts/AuthContext";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
@@ -28,17 +28,17 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <ThemeProvider>
     <QueryClientProvider client={client}>
       {/* <ReactQueryDevtools /> */}
-        <CookiesProvider>
-          <PlayerProvider>
-            <AuthProvider>
-              <BrowserRouter>
-                <Suspense>
-                  <App />
-                </Suspense>
-              </BrowserRouter>
-            </AuthProvider>
-          </PlayerProvider>
-        </CookiesProvider>
+      <CookiesProvider>
+        <PlayerProvider>
+          <AuthProvider>
+            <BrowserRouter>
+              <Suspense>
+                <App />
+              </Suspense>
+            </BrowserRouter>
+          </AuthProvider>
+        </PlayerProvider>
+      </CookiesProvider>
     </QueryClientProvider>
   </ThemeProvider>
   // </React.StrictMode>

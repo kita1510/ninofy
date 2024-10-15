@@ -26,8 +26,7 @@ const ControllerBar = () => {
     isLoop,
     isMuted,
     handleLoop,
-    mutedVolume,
-    unMutedVolume,
+    toggleMute,
     handleSeekVolume,
   } = usePlayer();
   // const audioRef = useRef();
@@ -125,7 +124,7 @@ const ControllerBar = () => {
               color="white"
               size={20}
               cursor={"pointer"}
-              onClick={mutedVolume}
+              onClick={toggleMute}
             />
           )}
           {volume >= 0.25 && (
@@ -133,7 +132,7 @@ const ControllerBar = () => {
               color="white"
               size={20}
               cursor={"pointer"}
-              onClick={mutedVolume}
+              onClick={toggleMute}
             />
           )}
           {volume == 0 && (
@@ -141,7 +140,7 @@ const ControllerBar = () => {
               color="white"
               size={20}
               cursor={"pointer"}
-              onClick={unMutedVolume}
+              onClick={toggleMute}
             />
           )}
           <RangeInput

@@ -1,0 +1,26 @@
+@import "./scrollbar.css";
+@import "./slider.css";
+
+@import "./tailwindcss.css";
+
+body{
+  background-color:#181818 ;
+}
+
+.linear-gradient-400 {
+  background-image: linear-gradient(to bottom, #181818, #242424);
+}
+.linear-gradient-500 {
+  background-image: linear-gradient(180deg, #242424, #181818);
+}
+
+.box-shadow-300{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.bow-shadow-500 {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+
+

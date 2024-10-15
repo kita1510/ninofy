@@ -1,9 +1,7 @@
 import React, {
-  ChangeEvent,
   createContext,
   ReactNode,
   useContext,
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -21,15 +19,13 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isLoop, setIsLoop] = useState(false);
-  const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLMediaElement>(null!);
   const [volume, setVolume] = useState(0.5);
   const [currentSong, setCurrentSong] =
     useState<React.MutableRefObject<HTMLMediaElement>>();
   const [song, setSong] = useState<any>();
-  let songDuration = 0;
 
-  songDuration = audioRef.current?.duration;
+  const songDuration = audioRef.current?.duration || 0;
 
   //   console.log(audioRef);
 
@@ -55,18 +51,20 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
     };
   };
 
-  const handleSeekTime = (e: any) => {
-    audioRef.current.currentTime = (songDuration / PERCENT) * e.target.value;
+  const handleSeekTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const seekValue = +e.target.value;
+    if (audioRef.current && songDuration) {
+      const newTime = (songDuration / PERCENT) * seekValue;
+      audioRef.current.currentTime = newTime;
+    }
   };
 
-  const mutedVolume = () => {
-    setIsMuted(true);
-    setVolume(0);
-  };
-
-  const unMutedVolume = () => {
-    setIsMuted(false);
-    setVolume(0.5);
+  const toggleMute = () => {
+    setIsMuted((prevIsMuted) => {
+      const newMutedState = !prevIsMuted;
+      setVolume(newMutedState ? 0 : 0.5);
+      return newMutedState;
+    });
   };
 
   const handleSeekVolume = (e: any) => {
@@ -76,13 +74,12 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const handleLoop = () => {
-    setIsLoop(!isLoop);
-    audioRef.current.loop = true;
+    if (audioRef.current) {
+      audioRef.current.loop = !audioRef.current.loop;
+      setIsLoop(audioRef.current.loop);
+    }
   };
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
   return (
     <PlayerContext.Provider
       value={{
@@ -94,8 +91,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
         // step,
         handlePausing,
         handleSeekTime,
-        mutedVolume,
-        unMutedVolume,
+        toggleMute,
         handleSeekVolume,
         handleLoop,
         audioRef,

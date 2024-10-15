@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import CardDetail from "./pages/track/CardDetail";
 import HomePage from "./pages/home/HomePage";
-import Login from "./pages/login/Login";
 import SearchPage from "./pages/search/SearchPage";
 import ControllerBar from "./components/controls/ControllerBar";
 import { ToastContainer } from "react-toastify";
@@ -33,7 +32,6 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/music/:id" element={<CardDetail />}></Route>
-        <Route path="/login" element={<Login />} />
         <Route path="/playlist/" element={<PlaylistDetail />} />
       </Routes>
       {!isLoginPage && (

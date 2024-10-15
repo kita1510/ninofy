@@ -1,0 +1,24 @@
+.transition-duration-300 {
+    transition: background-color 1s linear;
+  }
+  
+  .transition-duration-400 {
+    transition: all 1s ease;
+  }
+  
+  .card:hover .card-play{
+    display: block;
+  }
+  
+  @keyframes rising{
+    from{
+      opacity: 0;
+    }
+    to{
+      opacity: 1;
+    }
+  }
+  
+  .transition-duration-200{
+    animation: rising 2s ;
+  }

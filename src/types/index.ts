@@ -5,14 +5,15 @@ export interface SongProps {
   // id: number;
   isPlaying: boolean;
   isMuted: boolean;
-  song: Track ;
+  song: Track;
   setSong: React.Dispatch<React.SetStateAction<Track>>;
   playSong: () => void;
   handlePausing: () => void;
   songDuration: number;
   currentTime: number;
-  mutedVolume: () => void;
-  unMutedVolume: () => void;
+  // mutedVolume: () => void;
+  // unMutedVolume: () => void;
+  toggleMute: () => void;
   audioRef: any;
   // progress: number;
   volume: number;
