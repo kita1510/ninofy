@@ -25,7 +25,6 @@ const Image: React.FC<ImageProps> = ({ className, src, alt, ...props }) => {
         animate={{ opacity: imgLoading ? 0 : 1 }}
         src={srcImg}
         onLoad={imageLoaded}
-        transition={{ opacity: { delay: 1, duration: 0.5 } }}
         className={clsx("object-cover", className)}
         alt={alt}
       />

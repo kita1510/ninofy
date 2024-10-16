@@ -7,7 +7,7 @@ interface AvatarProps extends ImageProps {
 }
 
 
-const Avatar: React.FC<AvatarProps> = ({ src,avatarSrc, className, ...props }) => {
+const Avatar: React.FC<AvatarProps> = ({ src, className, ...props }) => {
   return (
     <Image
       src={src}

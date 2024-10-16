@@ -17,6 +17,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app, auth } from "../../lib/firebase";
 import Avatar from "../shared/Avatar";
 import * as Popover from "@radix-ui/react-popover";
+import HeaderProfile from "./HeaderProfile";
 
 const Header = ({ active }: { active: boolean }) => {
   const [isScroll, setIsScroll] = useState(false);
@@ -105,27 +106,13 @@ const Header = ({ active }: { active: boolean }) => {
             </Dialog.Portal>
           </Dialog.Root>
         ) : (
-          <Popover.Root>
-            <Popover.Trigger asChild>
-              <Avatar
-                className="cursor-pointer w-10 h-10"
-                src={currentUser.photoURL}
-              />
-            </Popover.Trigger>
-            <Popover.Portal>
-              <Popover.Content
-                className="w-[260px] rounded bg-white p-5 shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] will-change-[transform,opacity] focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.violet7)] data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=top]:animate-slideDownAndFade"
-                sideOffset={5}
-              >
-                <div className="flex flex-col gap-2.5">
-                  <p className="mb-2.5 text-[15px] font-medium leading-[19px] text-mauve12">
-                    Dimensions
-                  </p>
-                </div>
-                <Popover.Arrow className="fill-white" />
-              </Popover.Content>
-            </Popover.Portal>
-          </Popover.Root>
+          <>
+            {/* <Avatar
+              className="cursor-pointer w-10 h-10"
+              src={currentUser.photoURL}
+            /> */}
+            <HeaderProfile></HeaderProfile>
+          </>
         )}
       </div>
     </div>
